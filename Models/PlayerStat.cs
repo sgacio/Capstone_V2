@@ -5,6 +5,7 @@ namespace Capstone_V2.Models
 {
   public class PlayerStat
   {
+    public int Id { get; set; }
     public string ProperName { get; set; }
 
     public string Email { get; set; }

@@ -5,6 +5,7 @@ namespace Capstone_V2.Models
 {
   public class SingleGameSave
   {
+    public int Id { get; set; }
     public int TotalInventory { get; set; }
 
     public int InventoryPerSecond { get; set; }
