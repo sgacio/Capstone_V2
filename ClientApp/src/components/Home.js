@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
-import Latest from './images/latest.png';
-import './layout.css';
+import React, { Component } from 'react'
+import { useEffect, useState } from 'react'
+import Latest from './images/latest.png'
+import './layout.css'
 
 export class Home extends Component {
-  static displayName = Home.name;
-
+  static displayName = Home.name
   render() {
     return (
       <>
@@ -15,12 +15,23 @@ export class Home extends Component {
         Extra large devices (large desktops, 1200px and up) 
         */}
         <div className="container">
-          <p><span>Username</span> Coffee Shop</p>
-          <p><span>1</span> Coffee's collected</p>
-          <p><span>1</span> Cups Per Second(CPS)</p>
-          <img src={Latest} className="coffee-image img-fluid" alt="White starbucks coffee cup"></img>
+          <p>
+            <span>Username</span> Coffee Shop
+          </p>
+          <p>
+            <span>1</span> Coffee's collected
+          </p>
+          <p>
+            <span>1</span> Cups Per Second(CPS)
+          </p>
+          <button>
+            <img
+              src={Latest}
+              className="coffee-image img-fluid"
+              alt="White starbucks coffee cup"
+            ></img>
+          </button>
           <div className="container-fluid">
-
             <table className="table table-dark">
               <thead>
                 <tr>
@@ -34,33 +45,41 @@ export class Home extends Component {
               <tbody>
                 <tr>
                   <th>Number Of</th>
-                  <td><p>2</p></td>
-                  <td><p>1</p></td>
-                  <td><p>1</p></td>
-                  <td><p>1</p></td>
+                  <td>
+                    <p>2</p>
+                  </td>
+                  <td>
+                    <p>1</p>
+                  </td>
+                  <td>
+                    <p>1</p>
+                  </td>
+                  <td>
+                    <p>1</p>
+                  </td>
                 </tr>
               </tbody>
               <tbody>
                 <tr>
                   <th>Cost</th>
-                  <td><p>10</p></td>
-                  <td><p>10</p></td>
-                  <td><p>10</p></td>
-                  <td><p>10</p></td>
+                  <td>
+                    <p>10</p>
+                  </td>
+                  <td>
+                    <p>10</p>
+                  </td>
+                  <td>
+                    <p>10</p>
+                  </td>
+                  <td>
+                    <p>10</p>
+                  </td>
                 </tr>
               </tbody>
-
             </table>
           </div>
-
-
-
-
-
         </div>
-
-
       </>
-    );
+    )
   }
 }
