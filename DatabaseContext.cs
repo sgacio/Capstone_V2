@@ -46,6 +46,7 @@ namespace capstone_v2
     }
 
     public DbSet<PlayerStat> PlayerStats { get; set; }
-    public DbSet<SingleGameSave> SingleGameSave { get; set; }
+    public DbSet<SingleGameSave> SingleGameSaves { get; set; }
+    public DbSet<Objects> Object { get; set; }
   }
 }
