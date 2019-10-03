@@ -1,5 +1,5 @@
 import React from 'react'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import useInterval from '../Hooks/useInterval'
 import Latest from './images/latest.png'
 import './layout.css'
@@ -22,27 +22,27 @@ const Home = () => {
   }
 
   const [clicker, setClicker] = useState({
-    costOfASingle: 25, //from totalIncome
+    costOfASingle: 40, //from totalIncome
     IncomePerSecond: 0.1, //the amount of cookies that will be generated per second when this item is purchased
     numberOfClickers: 0
   })
 
-  const [grandma, setGrandma] = useState({
-    costOfASingle: 100, //from totalIncome
+  const [Worker, setWorker] = useState({
+    costOfASingle: 120, //from totalIncome
     IncomePerSecond: 0.5, //the amount of cookies that will be generated per second when this item is purchased
-    numberOfGrandmas: 0
+    numberOfWorkers: 0
   })
 
-  const [mine, setMine] = useState({
-    costOfASingle: 200, //from totalIncome
+  const [Keurig, setKeurig] = useState({
+    costOfASingle: 240, //from totalIncome
     IncomePerSecond: 0.8, //the amount of cookies that will be generated per second when this item is purchased
-    numberOfMines: 0
+    numberOfKeurigs: 0
   })
 
-  const [factory, setFactory] = useState({
-    costOfASingle: 400, //from totalIncome
+  const [Espresso, setEspresso] = useState({
+    costOfASingle: 480, //from totalIncome
     IncomePerSecond: 1, //the amount of cookies that will be generated per second when this item is purchased
-    numberOfFactory: 0
+    numberOfEspresso: 0
   })
 
   const AddPerSecondClicker = () => {
@@ -55,39 +55,42 @@ const Home = () => {
     }
   }
 
-  const AddGrandmaStats = () => {
+  const AddWorkerStats = () => {
     if (
-      clicker.numberOfClickers >= 10 &&
-      counter.totalIncome >= clicker.costOfASingle
+      clicker.numberOfClickers >= 1 &&
+      counter.totalIncome >= Worker.costOfASingle
     ) {
       createSeconds()
-      incrementGrandma()
-      decreaseTotalFromGrandmaCost()
-      increaseTotalSpentFromGrandma()
+      multiplyCostWorker()
+      incrementWorker()
+      decreaseTotalFromWorkerCost()
+      increaseTotalSpentFromWorker()
     }
   }
 
-  const AddMineStats = () => {
+  const AddKeurigStats = () => {
     if (
-      grandma.numberOfGrandmas >= 10 &&
-      counter.totalIncome >= mine.costOfASingle
+      Worker.numberOfWorkers >= 10 &&
+      counter.totalIncome >= Keurig.costOfASingle
     ) {
-      mineCreateSeconds()
-      incrementMine()
-      decreaseTotalIncomeFromMineCost()
-      increaseTotalSpentFromMine()
+      KeurigCreateSeconds()
+      multiplyCostKeurig()
+      incrementKeurig()
+      decreaseTotalIncomeFromKeurigCost()
+      increaseTotalSpentFromKeurig()
     }
   }
 
-  const AddFactoryStats = () => {
+  const AddEspressoStats = () => {
     if (
-      mine.numberOfMines >= 10 &&
-      counter.totalIncome >= factory.costOfASingle
+      Keurig.numberOfKeurigs >= 10 &&
+      counter.totalIncome >= Espresso.costOfASingle
     ) {
-      factoryCreateSeconds()
-      incrementFactory()
-      decreaseTotalIncomeFromFactoryCost()
-      increaseTotalSpentFromFactory()
+      EspressoCreateSeconds()
+      multiplyCostEspresso()
+      incrementEspresso()
+      decreaseTotalIncomeFromEspressoCost()
+      increaseTotalSpentFromEspresso()
     }
   }
 
@@ -100,7 +103,7 @@ const Home = () => {
 
   const multiplyCost = () => {
     setClicker(preCost => {
-      preCost.costOfASingle *= 1.18
+      preCost.costOfASingle *= 1.28
       return { ...preCost }
     })
   }
@@ -128,84 +131,104 @@ const Home = () => {
 
   const createSeconds = () => {
     setCounter(prevPerSecond => {
-      prevPerSecond.IncomePerSecond += grandma.IncomePerSecond
+      prevPerSecond.IncomePerSecond += Worker.IncomePerSecond
       return { ...prevPerSecond }
     })
   }
+  const multiplyCostWorker = () => {
+    setWorker(preCost => {
+      preCost.costOfASingle *= 1.28
+      return { ...preCost }
+    })
+  }
 
-  const incrementGrandma = () => {
-    setGrandma(prevCounter => {
-      prevCounter.numberOfGrandmas += 1
+  const incrementWorker = () => {
+    setWorker(prevCounter => {
+      prevCounter.numberOfWorkers += 1
       return { ...prevCounter }
     })
   }
 
-  const decreaseTotalFromGrandmaCost = () => {
+  const decreaseTotalFromWorkerCost = () => {
     setCounter(prevCounter => {
-      prevCounter.totalIncome -= grandma.costOfASingle
+      prevCounter.totalIncome -= Worker.costOfASingle
       return { ...prevCounter }
     })
   }
 
-  const increaseTotalSpentFromGrandma = () => {
+  const increaseTotalSpentFromWorker = () => {
     setCounter(prevAmountSpent => {
-      prevAmountSpent.amountSpent += grandma.costOfASingle
+      prevAmountSpent.amountSpent += Worker.costOfASingle
       return { ...prevAmountSpent }
     })
   }
 
-  const mineCreateSeconds = () => {
+  const multiplyCostKeurig = () => {
+    setKeurig(preCost => {
+      preCost.costOfASingle *= 1.28
+      return { ...preCost }
+    })
+  }
+
+  const KeurigCreateSeconds = () => {
     setCounter(prevPerSecond => {
-      prevPerSecond.IncomePerSecond += mine.IncomePerSecond
+      prevPerSecond.IncomePerSecond += Keurig.IncomePerSecond
       return { ...prevPerSecond }
     })
   }
 
-  const incrementMine = () => {
-    setMine(prevCounter => {
-      prevCounter.numberOfMines += 1
+  const incrementKeurig = () => {
+    setKeurig(prevCounter => {
+      prevCounter.numberOfKeurigs += 1
       return { ...prevCounter }
     })
   }
 
-  const decreaseTotalIncomeFromMineCost = () => {
+  const decreaseTotalIncomeFromKeurigCost = () => {
     setCounter(prevCounter => {
-      prevCounter.totalIncome -= mine.costOfASingle
+      prevCounter.totalIncome -= Keurig.costOfASingle
       return { ...prevCounter }
     })
   }
 
-  const increaseTotalSpentFromMine = () => {
+  const increaseTotalSpentFromKeurig = () => {
     setCounter(prevAmountSpent => {
-      prevAmountSpent.amountSpent += mine.costOfASingle
+      prevAmountSpent.amountSpent += Keurig.costOfASingle
       return { ...prevAmountSpent }
     })
   }
 
-  const factoryCreateSeconds = () => {
+  const multiplyCostEspresso = () => {
+    setEspresso(preCost => {
+      preCost.costOfASingle *= 1.28
+      return { ...preCost }
+    })
+  }
+
+  const EspressoCreateSeconds = () => {
     setCounter(prevPerSecond => {
-      prevPerSecond.IncomePerSecond += factory.IncomePerSecond
+      prevPerSecond.IncomePerSecond += Espresso.IncomePerSecond
       return { ...prevPerSecond }
     })
   }
 
-  const incrementFactory = () => {
-    setFactory(prevCounter => {
-      prevCounter.numberOfFactory += 1
+  const incrementEspresso = () => {
+    setEspresso(prevCounter => {
+      prevCounter.numberOfEspresso += 1
       return { ...prevCounter }
     })
   }
 
-  const decreaseTotalIncomeFromFactoryCost = () => {
+  const decreaseTotalIncomeFromEspressoCost = () => {
     setCounter(prevCounter => {
-      prevCounter.totalIncome -= factory.costOfASingle
+      prevCounter.totalIncome -= Espresso.costOfASingle
       return { ...prevCounter }
     })
   }
 
-  const increaseTotalSpentFromFactory = () => {
+  const increaseTotalSpentFromEspresso = () => {
     setCounter(prevAmountSpent => {
-      prevAmountSpent.amountSpent += factory.costOfASingle
+      prevAmountSpent.amountSpent += Espresso.costOfASingle
       return { ...prevAmountSpent }
     })
   }
@@ -230,12 +253,12 @@ const Home = () => {
           <span>Username</span> Coffee Shop
         </p>
         <p>
-          <span>1</span> Coffee's collected
+          <span>{counter.totalIncome}</span> Coffee's collected
         </p>
         <p>
-          <span>1</span> Cups Per Second(CPS)
+          <span>{counter.IncomePerSecond}</span> Cups Per Second(CPS)
         </p>
-        <button>
+        <button onClick={() => createCounter()}>
           <img
             src={Latest}
             className="coffee-image img-fluid"
@@ -247,26 +270,34 @@ const Home = () => {
             <thead>
               <tr>
                 <th></th>
-                <th scope="col">clicker</th>
-                <th scope="col">Worker</th>
-                <th scope="col">Keurig</th>
-                <th scope="col">Factory</th>
+                <button onClick={() => AddPerSecondClicker()}>
+                  <th scope="col">Clicker</th>
+                </button>
+                <button onClick={() => AddWorkerStats()}>
+                  <th scope="col">Worker</th>
+                </button>
+                <button onClick={() => AddKeurigStats()}>
+                  <th scope="col">Keurig</th>
+                </button>
+                <button onClick={() => AddEspressoStats()}>
+                  <th scope="col">Espresso Machine</th>
+                </button>
               </tr>
             </thead>
             <tbody>
               <tr>
                 <th>Number Of</th>
                 <td>
-                  <p>2</p>
+                  <p>{clicker.numberOfClickers}</p>
                 </td>
                 <td>
-                  <p>1</p>
+                  <p>{Worker.numberOfWorkers}</p>
                 </td>
                 <td>
-                  <p>1</p>
+                  <p>{Keurig.numberOfKeurigs}</p>
                 </td>
                 <td>
-                  <p>1</p>
+                  <p>{Espresso.numberOfEspresso}</p>
                 </td>
               </tr>
             </tbody>
@@ -274,16 +305,16 @@ const Home = () => {
               <tr>
                 <th>Cost</th>
                 <td>
-                  <p>10</p>
+                  <p>{clicker.costOfASingle}</p>
                 </td>
                 <td>
-                  <p>10</p>
+                  <p>{Worker.costOfASingle}</p>
                 </td>
                 <td>
-                  <p>10</p>
+                  <p>{Keurig.costOfASingle}</p>
                 </td>
                 <td>
-                  <p>10</p>
+                  <p>{Espresso.costOfASingle}</p>
                 </td>
               </tr>
             </tbody>
