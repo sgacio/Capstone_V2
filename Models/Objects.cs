@@ -20,7 +20,7 @@ namespace Capstone_V2.Models
     public string Keurig { get; set; }
 
     [Column(TypeName = "json")]
-    public string Factory { get; set; }
+    public string EspressoMachine { get; set; }
     public List<SingleGameSave> SingleGameSaves { get; set; }
   }
 }
