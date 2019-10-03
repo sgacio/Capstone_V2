@@ -1,23 +1,24 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom'
 import { slide as Menu } from 'react-burger-menu'
 import './MainNavBar.scss'
 import { AdminPage } from './AdminPage'
-import { Home } from './Home'
-
-
+import Home from './Home'
 
 export class MainNavBar extends Component {
-
   render() {
     return (
       <main>
         <Router>
-          <Menu right >
-            <Link className="menu-item" to="/Home">CoffeeClicker</Link>
+          <Menu right>
+            <Link className="menu-item" to="/Home">
+              CoffeeClicker
+            </Link>
             {/* <Link className="menu-item" to="/UserProfile">Username</Link>
             <Link className="menu-item" to="/RedeemPage">Redeem</Link> */}
-            <Link className="menu-item" to="/AdminPage">Admin</Link>
+            <Link className="menu-item" to="/AdminPage">
+              Admin
+            </Link>
           </Menu>
 
           <switch>
@@ -28,11 +29,8 @@ export class MainNavBar extends Component {
           </switch>
         </Router>
       </main>
-
-    );
+    )
   }
 }
 
-
-export default MainNavBar;
-
+export default MainNavBar
