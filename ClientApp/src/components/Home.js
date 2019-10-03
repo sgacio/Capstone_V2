@@ -23,25 +23,25 @@ const Home = () => {
 
   const [clicker, setClicker] = useState({
     costOfASingle: 40, //from totalIncome
-    IncomePerSecond: 0.1, //the amount of cookies that will be generated per second when this item is purchased
+    IncomePerSecond: 0.05, //the amount of cookies that will be generated per second when this item is purchased
     numberOfClickers: 0
   })
 
   const [Worker, setWorker] = useState({
-    costOfASingle: 120, //from totalIncome
-    IncomePerSecond: 0.5, //the amount of cookies that will be generated per second when this item is purchased
+    costOfASingle: 760, //from totalIncome
+    IncomePerSecond: 0.3, //the amount of cookies that will be generated per second when this item is purchased
     numberOfWorkers: 0
   })
 
   const [Keurig, setKeurig] = useState({
-    costOfASingle: 240, //from totalIncome
-    IncomePerSecond: 0.8, //the amount of cookies that will be generated per second when this item is purchased
+    costOfASingle: 1600, //from totalIncome
+    IncomePerSecond: 0.5, //the amount of cookies that will be generated per second when this item is purchased
     numberOfKeurigs: 0
   })
 
   const [Espresso, setEspresso] = useState({
-    costOfASingle: 480, //from totalIncome
-    IncomePerSecond: 1, //the amount of cookies that will be generated per second when this item is purchased
+    costOfASingle: 5000, //from totalIncome
+    IncomePerSecond: 0.8, //the amount of cookies that will be generated per second when this item is purchased
     numberOfEspresso: 0
   })
 
@@ -253,10 +253,12 @@ const Home = () => {
           <span>Username</span> Coffee Shop
         </p>
         <p>
-          <span>{counter.totalIncome}</span> Coffee's collected
+          <span>{Math.round(counter.totalIncome * 100) / 100}</span> Coffee's
+          collected
         </p>
         <p>
-          <span>{counter.IncomePerSecond}</span> Cups Per Second(CPS)
+          <span>{Math.ceil(counter.IncomePerSecond * 100) / 100}</span> Cups Per
+          Second(CPS)
         </p>
         <button onClick={() => createCounter()}>
           <img
@@ -305,16 +307,16 @@ const Home = () => {
               <tr>
                 <th>Cost</th>
                 <td>
-                  <p>{clicker.costOfASingle}</p>
+                  <p>{Math.round(clicker.costOfASingle * 100) / 100}</p>
                 </td>
                 <td>
-                  <p>{Worker.costOfASingle}</p>
+                  <p>{Math.round(Worker.costOfASingle * 100) / 100}</p>
                 </td>
                 <td>
-                  <p>{Keurig.costOfASingle}</p>
+                  <p>{Math.round(Keurig.costOfASingle * 100) / 100}</p>
                 </td>
                 <td>
-                  <p>{Espresso.costOfASingle}</p>
+                  <p>{Math.round(Espresso.costOfASingle * 100) / 100}</p>
                 </td>
               </tr>
             </tbody>
