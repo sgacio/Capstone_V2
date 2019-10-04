@@ -3,8 +3,8 @@ import { Route } from 'react-router'
 import { Layout } from './components/Layout'
 import { Home } from './components/Home'
 import { FetchData } from './components/FetchData'
-// import { Counter } from './components/Counter'
 import Testing from './Testing'
+
 
 export default class App extends Component {
   static displayName = App.name
@@ -13,7 +13,6 @@ export default class App extends Component {
     return (
       <Layout>
         <Route exact path="/" component={Home} />
-        {/* <Route path="/counter" component={Counter} /> */}
         <Route path="/fetch-data" component={FetchData} />
         <Route path="/hello" component={Testing} />
       </Layout>

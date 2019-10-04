@@ -1,6 +1,15 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom'
-import { slide as Menu } from 'react-burger-menu'
+import { BrowserRouter as Router, Route, Switch, Link, NavLink } from 'react-router-dom'
+import {
+  Collapse,
+  Container,
+  Navbar,
+  NavbarBrand,
+  NavbarToggler,
+  NavItem,
+
+} from 'reactstrap'
+
 import './MainNavBar.scss'
 import { AdminPage } from './AdminPage'
 import { Home } from './Home'
@@ -9,24 +18,71 @@ import { Home } from './Home'
 
 export class MainNavBar extends Component {
 
+  constructor(props) {
+    super(props)
+
+    this.toggleNavbar = this.toggleNavbar.bind(this)
+    this.state = {
+      collapsed: true
+    }
+  }
+
+  toggleNavbar() {
+    this.setState({
+      collapsed: !this.state.collapsed
+    })
+  }
+
   render() {
     return (
       <main>
-        <Router>
-          <Menu right >
-            <Link className="menu-item" to="/Home">CoffeeClicker</Link>
-            {/* <Link className="menu-item" to="/UserProfile">Username</Link>
-            <Link className="menu-item" to="/RedeemPage">Redeem</Link> */}
-            <Link className="menu-item" to="/AdminPage">Admin</Link>
-          </Menu>
+        <header>
+          <Navbar
+            className="navbar-expand-sm navbar-toggleable-sm ng-white border-bottom box-shadow mb-3"
+            light
+          >
+            <Container>
+              <NavbarBrand tag={Link} to="/">
+                CoffeeClicker
+            </NavbarBrand>
+              <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
+              <Collapse
+                className="d-sm-inline-flex flex-sm-row-reverse"
+                isOpen={!this.state.collapsed}
+                navbar
+              >
+                <ul className="navbar-nav flex-grow">
+                  <NavItem>
 
-          <switch>
-            <Route exact path="/Home" component={Home}></Route>
-            {/* <Route exact path="/UserProfile" component={UserProfile}></Route>
-          <Route exact path="/RedeemPage" component={RedeemPage}></Route> */}
-            <Route exact path="/AdminPage" component={AdminPage}></Route>
-          </switch>
-        </Router>
+                  </NavItem>
+                  <NavItem>
+                    <NavLink tag={Link} className="text-dark" to="/login">
+                      Login
+                  </NavLink>
+                  </NavItem>{' '}
+
+                  <NavItem>
+                    <NavLink tag={Link} className="text-dark" to="/logout">
+                      Logout
+                  </NavLink>
+                  </NavItem>
+
+                  <NavItem>
+                    <NavLink tag={Link} className="text-dark" to="/AdminPage">
+                      Admins
+                  </NavLink>
+                  </NavItem>
+                </ul>
+              </Collapse>
+            </Container>
+          </Navbar>
+          <Router>
+            <Switch>
+              <Route exact path="/Home" component={Home}></Route>
+              <Route exact path="/AdminPage" component={AdminPage}></Route>
+            </Switch>
+          </Router>
+        </header>
       </main>
 
     );
