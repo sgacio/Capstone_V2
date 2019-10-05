@@ -29,7 +29,7 @@ const Home = () => {
   })
 
   const [Worker, setWorker] = useState({
-    costOfASingle: 760, //from totalIncome
+    costOfASingle: 540, //from totalIncome
     IncomePerSecond: 0.3, //the amount of cookies that will be generated per second when this item is purchased
     numberOfWorkers: 0
   })
