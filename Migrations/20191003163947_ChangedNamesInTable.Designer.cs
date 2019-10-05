@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using capstone_v2;
@@ -9,9 +10,10 @@ using capstone_v2;
 namespace sdgreacttemplate.Migrations
 {
     [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+    [Migration("20191003163947_ChangedNamesInTable")]
+    partial class ChangedNamesInTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -25,9 +27,6 @@ namespace sdgreacttemplate.Migrations
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Clicker")
-                        .HasColumnType("json");
-
-                    b.Property<string>("Counter")
                         .HasColumnType("json");
 
                     b.Property<DateTime>("Date");

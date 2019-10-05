@@ -1,7 +1,8 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import useInterval from '../Hooks/useInterval'
 import Latest from './images/latest.png'
+import axios from 'axios'
 import './layout.css'
 
 const Home = () => {
@@ -28,7 +29,7 @@ const Home = () => {
   })
 
   const [Worker, setWorker] = useState({
-    costOfASingle: 760, //from totalIncome
+    costOfASingle: 540, //from totalIncome
     IncomePerSecond: 0.3, //the amount of cookies that will be generated per second when this item is purchased
     numberOfWorkers: 0
   })
@@ -45,6 +46,8 @@ const Home = () => {
     numberOfEspresso: 0
   })
 
+  const [Id, setId] = useState()
+
   const AddPerSecondClicker = () => {
     if (counter.totalIncome >= clicker.costOfASingle) {
       giveMeSeconds()
@@ -52,6 +55,7 @@ const Home = () => {
       letsIncrement()
       decreaseTotalIncome()
       increaseTotalSpent()
+      // putToServer()
     }
   }
 
@@ -65,6 +69,7 @@ const Home = () => {
       incrementWorker()
       decreaseTotalFromWorkerCost()
       increaseTotalSpentFromWorker()
+      // putToServer()
     }
   }
 
@@ -78,6 +83,7 @@ const Home = () => {
       incrementKeurig()
       decreaseTotalIncomeFromKeurigCost()
       increaseTotalSpentFromKeurig()
+      // putToServer()
     }
   }
 
@@ -91,6 +97,7 @@ const Home = () => {
       incrementEspresso()
       decreaseTotalIncomeFromEspressoCost()
       increaseTotalSpentFromEspresso()
+      // putToServer()
     }
   }
 
@@ -240,6 +247,64 @@ const Home = () => {
     })
   }, 1000)
 
+  useInterval(() => {
+    counterToServer()
+  }, 30000)
+
+  const counterToServer = async () => {
+    const data = {
+      Id: Id,
+      counter: JSON.stringify(counter),
+      clicker: JSON.stringify(clicker),
+      worker: JSON.stringify(Worker),
+      Keurig: JSON.stringify(Keurig),
+      EspressoMachine: JSON.stringify(Espresso)
+    }
+
+    const resp = await axios.put(
+      `https://localhost:5001/api/Object/${Id}`,
+      data
+    )
+  }
+
+  const saveToServer = async () => {
+    const data = {
+      counter: JSON.stringify(counter),
+      clicker: JSON.stringify(clicker),
+      worker: JSON.stringify(Worker),
+      Keurig: JSON.stringify(Keurig),
+      EspressoMachine: JSON.stringify(Espresso)
+    }
+
+    const resp = await axios.post('https://localhost:5001/api/Object', data)
+
+    setId(resp.data.id)
+    console.log(resp.data.id)
+  }
+
+  const putToServer = async () => {
+    const data = {
+      Id: Id,
+      counter: JSON.stringify(counter),
+      clicker: JSON.stringify(clicker),
+      worker: JSON.stringify(Worker),
+      Keurig: JSON.stringify(Keurig),
+      EspressoMachine: JSON.stringify(Espresso)
+    }
+    const resp = await axios.put(
+      `https://localhost:5001/api/Object/${Id}`,
+      data
+    )
+  }
+
+  useEffect(() => {
+    saveToServer()
+  }, [])
+
+  useEffect(() => {
+    putToServer()
+  }, [clicker, Worker, Keurig, Espresso])
+
   return (
     <>
       {/* 
@@ -272,16 +337,36 @@ const Home = () => {
             <thead>
               <tr>
                 <th></th>
-                <button onClick={() => AddPerSecondClicker()}>
+                <button
+                  onClick={
+                    () => AddPerSecondClicker()
+                    // putToServer()
+                  }
+                >
                   <th scope="col">Clicker</th>
                 </button>
-                <button onClick={() => AddWorkerStats()}>
+                <button
+                  onClick={
+                    () => AddWorkerStats()
+                    // putToServer()
+                  }
+                >
                   <th scope="col">Worker</th>
                 </button>
-                <button onClick={() => AddKeurigStats()}>
+                <button
+                  onClick={
+                    () => AddKeurigStats()
+                    // putToServer()
+                  }
+                >
                   <th scope="col">Keurig</th>
                 </button>
-                <button onClick={() => AddEspressoStats()}>
+                <button
+                  onClick={
+                    () => AddEspressoStats()
+                    // putToServer()
+                  }
+                >
                   <th scope="col">Espresso Machine</th>
                 </button>
               </tr>
