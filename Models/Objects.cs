@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Capstone_V2.Models
 {
@@ -9,6 +10,9 @@ namespace Capstone_V2.Models
     public int Id { get; set; }
 
     public DateTime Date { get; set; } = DateTime.Now;
+
+    [Column(TypeName = "json")]
+    public string Counter { get; set; }
 
     [Column(TypeName = "json")]
     public string Clicker { get; set; }
