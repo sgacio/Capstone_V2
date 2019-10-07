@@ -13,5 +13,6 @@ namespace Capstone_V2.Models
     public int TotalAllTimeInventory { get; set; }
     public DateTime Date { get; set; } = DateTime.Now;
     public List<SingleGameSave> SingleGameSaves { get; set; }
+    //public List<Redeem> Redeem {get; set;}
   }
 }
