@@ -11,6 +11,7 @@ namespace Capstone_V2.Models
     public string HandleUserName { get; set; }
     public string Password { get; set; }
     public int TotalAllTimeInventory { get; set; }
+    public DateTime Date { get; set; } = DateTime.Now;
     public List<SingleGameSave> SingleGameSaves { get; set; }
   }
 }

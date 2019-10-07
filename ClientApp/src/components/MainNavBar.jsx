@@ -12,9 +12,7 @@ import {
 
 import './MainNavBar.scss'
 import { AdminPage } from './AdminPage'
-import { Home } from './Home'
-
-
+import Home from './Home'
 
 export class MainNavBar extends Component {
 
@@ -77,11 +75,8 @@ export class MainNavBar extends Component {
           </Switch>
         </Router>
       </main>
-
-    );
+    )
   }
 }
 
-
-export default MainNavBar;
-
+export default MainNavBar
