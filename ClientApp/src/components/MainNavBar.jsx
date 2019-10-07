@@ -41,48 +41,41 @@ export class MainNavBar extends Component {
             className="navbar-expand-sm navbar-toggleable-sm ng-white border-bottom box-shadow mb-3"
             light
           >
-            <Container>
-              <NavbarBrand tag={Link} to="/">
-                CoffeeClicker
+
+            <NavbarBrand tag={Link} to="/">
+              CoffeeClicker
             </NavbarBrand>
-              <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
-              <Collapse
-                className="d-sm-inline-flex flex-sm-row-reverse"
-                isOpen={!this.state.collapsed}
-                navbar
-              >
-                <ul className="navbar-nav flex-grow">
-                  <NavItem>
+            <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
 
-                  </NavItem>
-                  <NavItem>
-                    <NavLink tag={Link} className="text-dark" to="/login">
-                      Login
+            <ul className="navbar-nav flex-grow">
+              <NavItem>
+                <NavLink tag={Link} className="text-dark" to="/login">
+                  Login
                   </NavLink>
-                  </NavItem>{' '}
+              </NavItem>{' '}
 
-                  <NavItem>
-                    <NavLink tag={Link} className="text-dark" to="/logout">
-                      Logout
+              <NavItem>
+                <NavLink tag={Link} className="text-dark" to="/logout">
+                  Logout
                   </NavLink>
-                  </NavItem>
+              </NavItem>
 
-                  <NavItem>
-                    <NavLink tag={Link} className="text-dark" to="/AdminPage">
-                      Admins
+              <NavItem>
+                <NavLink tag={Link} className="text-dark" to="/AdminPage">
+                  Admins
                   </NavLink>
-                  </NavItem>
-                </ul>
-              </Collapse>
-            </Container>
+              </NavItem>
+            </ul>
+
+
           </Navbar>
-          <Router>
-            <Switch>
-              <Route exact path="/Home" component={Home}></Route>
-              <Route exact path="/AdminPage" component={AdminPage}></Route>
-            </Switch>
-          </Router>
         </header>
+        <Router>
+          <Switch>
+            <Route exact path="/Home" component={Home}></Route>
+            <Route exact path="/AdminPage" component={AdminPage}></Route>
+          </Switch>
+        </Router>
       </main>
 
     );
