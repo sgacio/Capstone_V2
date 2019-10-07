@@ -1,5 +1,12 @@
-.coffee-image
-{
-  height: 22rem;
-  width: 30rem;
+.coffee-image {
+  height: 17rem;
+  width: 21rem;
+}
+
+.margin {
+  margin-top: 1rem;
+}
+
+.top-container {
+  margin-top: 1rem;
 }

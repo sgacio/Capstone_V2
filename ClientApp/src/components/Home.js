@@ -313,62 +313,39 @@ const Home = () => {
         Large devices (desktops, 992px and up)
         Extra large devices (large desktops, 1200px and up) 
         */}
-      <div className="container">
-        <p>
-          <span>Username</span> Coffee Shop
-        </p>
-        <p>
-          <span>{Math.round(counter.totalIncome * 100) / 100}</span> Coffee's
-          collected
-        </p>
-        <p>
-          <span>{Math.ceil(counter.IncomePerSecond * 100) / 100}</span> Cups Per
-          Second(CPS)
-        </p>
-        <button onClick={() => createCounter()}>
+      <div className="container text-center">
+        <div className="top-container">
+          <p>
+            <span>Username</span> Coffee Shop
+          </p>
+          <p>
+            <span>{Math.round(counter.totalIncome * 100) / 100}</span> Coffee's
+            collected
+          </p>
+          <p>
+            <span>{Math.ceil(counter.IncomePerSecond * 100) / 100}</span> Cups
+            Per Second(CPS)
+          </p>
+        </div>
+        <button
+          className="btn btn-outline-dark"
+          onClick={() => createCounter()}
+        >
           <img
             src={Latest}
             className="coffee-image img-fluid"
             alt="White starbucks coffee cup"
           ></img>
         </button>
-        <div className="container-fluid">
+        <div className="container-fluid margin">
           <table className="table table-dark">
             <thead>
               <tr>
                 <th></th>
-                <button
-                  onClick={
-                    () => AddPerSecondClicker()
-                    // putToServer()
-                  }
-                >
-                  <th scope="col">Clicker</th>
-                </button>
-                <button
-                  onClick={
-                    () => AddWorkerStats()
-                    // putToServer()
-                  }
-                >
-                  <th scope="col">Worker</th>
-                </button>
-                <button
-                  onClick={
-                    () => AddKeurigStats()
-                    // putToServer()
-                  }
-                >
-                  <th scope="col">Keurig</th>
-                </button>
-                <button
-                  onClick={
-                    () => AddEspressoStats()
-                    // putToServer()
-                  }
-                >
-                  <th scope="col">Espresso Machine</th>
-                </button>
+                <th scope="col">Clicker</th>
+                <th scope="col">Worker</th>
+                <th scope="col">Keurig</th>
+                <th scope="col">Espresso Machine</th>
               </tr>
             </thead>
             <tbody>
@@ -402,6 +379,49 @@ const Home = () => {
                 </td>
                 <td>
                   <p>{Math.round(Espresso.costOfASingle * 100) / 100}</p>
+                </td>
+              </tr>
+              <tr>
+                <th>Purchase Button</th>
+                <td>
+                  <button
+                    className="btn btn-outline-light"
+                    onClick={() => {
+                      AddPerSecondClicker()
+                    }}
+                  >
+                    Clicking
+                  </button>
+                </td>
+                <td>
+                  <button
+                    className="btn btn-outline-light"
+                    onClick={() => {
+                      AddWorkerStats()
+                    }}
+                  >
+                    Worker
+                  </button>
+                </td>
+                <td>
+                  <button
+                    className="btn btn-outline-light"
+                    onClick={() => {
+                      AddKeurigStats()
+                    }}
+                  >
+                    Keurig
+                  </button>
+                </td>
+                <td>
+                  <button
+                    className="btn btn-outline-light"
+                    onClick={() => {
+                      AddEspressoStats()
+                    }}
+                  >
+                    Espresso
+                  </button>
                 </td>
               </tr>
             </tbody>
