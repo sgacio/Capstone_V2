@@ -6,9 +6,6 @@ import config from "./FirebaseAuth";
 import Axios from 'axios';
 
 const Login = () => {
-  const [userData, setUserData] = useState(result)
-
-
   firebase.initializeApp(config);
   const firebaseAppAuth = firebase.auth();
 
@@ -18,22 +15,24 @@ const Login = () => {
   const signInWithPopup = () => {
     firebase.auth().signInWithPopup(provider.googleProviders).then((result) => {
       console.log(result)
+      putUserOnServer(result)
       var token = result.credential.accessToken;
     })
   }
 
-  const putUserOnServer = async () => {
+  const putUserOnServer = async (result) => {
     const resp = await Axios.post('https://localhost:5001/api/PlayerStat', {
-      ProperName: userData.displayName,
-      Email: userData.email
+      ProperName: result.user.displayName,
+      Email: result.user.email
     })
   }
 
   return (
     <div>
-      <button onClick={() => signInWithPopup(), putUserOnServer()} type="">
+      <button onClick={() => signInWithPopup()} type="">
         Sign in
       </button>
+      {console.log()}
     </div>
   );
 }
