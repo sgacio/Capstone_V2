@@ -5,6 +5,7 @@ import Home from './components/Home'
 import { FetchData } from './components/FetchData'
 import { base } from './components/FirebaseAuth'
 import Testing from './Testing'
+import Login from './components/Login'
 
 
 export default class App extends Component {
@@ -16,6 +17,7 @@ export default class App extends Component {
         <Route exact path="/" component={Home} />
         <Route path="/fetch-data" component={FetchData} />
         <Route path="/hello" component={Testing} />
+        <Route path="/Login" component={Login} />
       </Layout>
     )
   }
