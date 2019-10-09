@@ -293,6 +293,7 @@ const Home = props => {
 
     setId(resp.data.id)
     console.log(resp.data.id)
+    console.log(resp.data)
     sendPlayerIdToSingleGameSave(resp.data.id)
   }
 
