@@ -42,10 +42,12 @@ const Login = () => {
       {id ? (
         <Redirect to={`/Game/${id}`}></Redirect>
       ) : (
-        <button onClick={() => signInWithPopup()} type="">
-          Sign in
+
+          <button onClick={() => signInWithPopup()} type="">
+            Sign in
         </button>
-      )}
+        )}
+
     </div>
   )
 }

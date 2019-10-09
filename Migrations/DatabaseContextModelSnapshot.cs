@@ -8,93 +8,93 @@ using capstone_v2;
 
 namespace sdgreacttemplate.Migrations
 {
-    [DbContext(typeof(DatabaseContext))]
-    partial class DatabaseContextModelSnapshot : ModelSnapshot
+  [DbContext(typeof(DatabaseContext))]
+  partial class DatabaseContextModelSnapshot : ModelSnapshot
+  {
+    protected override void BuildModel(ModelBuilder modelBuilder)
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
-        {
 #pragma warning disable 612, 618
-            modelBuilder
-                .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)
-                .HasAnnotation("ProductVersion", "2.2.0-rtm-35687")
-                .HasAnnotation("Relational:MaxIdentifierLength", 63);
+      modelBuilder
+          .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)
+          .HasAnnotation("ProductVersion", "2.2.0-rtm-35687")
+          .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            modelBuilder.Entity("Capstone_V2.Models.Objects", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+      modelBuilder.Entity("Capstone_V2.Models.Objects", b =>
+          {
+            b.Property<int>("Id")
+                      .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Clicker")
-                        .HasColumnType("json");
+            b.Property<string>("Clicker")
+                      .HasColumnType("json");
 
-                    b.Property<string>("Counter")
-                        .HasColumnType("json");
+            b.Property<string>("Counter")
+                      .HasColumnType("json");
 
-                    b.Property<DateTime>("Date");
+            b.Property<DateTime>("Date");
 
-                    b.Property<string>("EspressoMachine")
-                        .HasColumnType("json");
+            b.Property<string>("EspressoMachine")
+                      .HasColumnType("json");
 
-                    b.Property<string>("Keurig")
-                        .HasColumnType("json");
+            b.Property<string>("Keurig")
+                      .HasColumnType("json");
 
-                    b.Property<string>("Worker")
-                        .HasColumnType("json");
+            b.Property<string>("Worker")
+                      .HasColumnType("json");
 
-                    b.HasKey("Id");
+            b.HasKey("Id");
 
-                    b.ToTable("Object");
-                });
+            b.ToTable("Object");
+          });
 
-            modelBuilder.Entity("Capstone_V2.Models.PlayerStat", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+      modelBuilder.Entity("Capstone_V2.Models.PlayerStat", b =>
+          {
+            b.Property<int>("Id")
+                      .ValueGeneratedOnAdd();
 
-                    b.Property<DateTime>("Date");
+            b.Property<DateTime>("Date");
 
-                    b.Property<string>("Email");
+            b.Property<string>("Email");
 
-                    b.Property<string>("ProperName");
+            b.Property<string>("ProperName");
 
-                    b.HasKey("Id");
+            b.HasKey("Id");
 
-                    b.ToTable("PlayerStats");
-                });
+            b.ToTable("PlayerStats");
+          });
 
-            modelBuilder.Entity("Capstone_V2.Models.SingleGameSave", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
+      modelBuilder.Entity("Capstone_V2.Models.SingleGameSave", b =>
+          {
+            b.Property<int>("Id")
+                      .ValueGeneratedOnAdd();
 
-                    b.Property<int?>("ObjectId");
+            b.Property<int?>("ObjectId");
 
-                    b.Property<int?>("ObjectsId");
+            b.Property<int?>("ObjectsId");
 
-                    b.Property<int?>("PlayerId");
+            b.Property<int?>("PlayerId");
 
-                    b.Property<int?>("PlayerStatId");
+            b.Property<int?>("PlayerStatId");
 
-                    b.HasKey("Id");
+            b.HasKey("Id");
 
-                    b.HasIndex("ObjectsId");
+            b.HasIndex("ObjectsId");
 
-                    b.HasIndex("PlayerStatId");
+            b.HasIndex("PlayerStatId");
 
-                    b.ToTable("SingleGameSaves");
-                });
+            b.ToTable("SingleGameSaves");
+          });
 
-            modelBuilder.Entity("Capstone_V2.Models.SingleGameSave", b =>
-                {
-                    b.HasOne("Capstone_V2.Models.Objects", "Objects")
-                        .WithMany("SingleGameSaves")
-                        .HasForeignKey("ObjectsId");
+      modelBuilder.Entity("Capstone_V2.Models.SingleGameSave", b =>
+          {
+            b.HasOne("Capstone_V2.Models.Objects", "Objects")
+                      .WithMany("SingleGameSaves")
+                      .HasForeignKey("ObjectsId");
 
-                    b.HasOne("Capstone_V2.Models.PlayerStat", "PlayerStat")
-                        .WithMany("SingleGameSaves")
-                        .HasForeignKey("PlayerStatId");
-                });
+            b.HasOne("Capstone_V2.Models.PlayerStat", "PlayerStat")
+                      .WithMany("SingleGameSaves")
+                      .HasForeignKey("PlayerStatId");
+          });
 #pragma warning restore 612, 618
-        }
     }
+  }
 }

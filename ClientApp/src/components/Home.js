@@ -347,6 +347,8 @@ const Home = props => {
             alt="White starbucks coffee cup"
           ></img>
         </button>
+
+
         <div className="container-fluid margin">
           <table className="table table-dark">
             <thead>

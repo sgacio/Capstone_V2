@@ -1,5 +1,7 @@
 import React from 'react';
 
+
+
 export const AdminPage = () => {
   return (
     <div>
@@ -58,57 +60,37 @@ export const AdminPage = () => {
               </div>
             </div>
           </div>
-
-
-
-
-          <table className="table table-dark">
-            <thead>
-              <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Robert</td>
-                <td>Frank</td>
-                <td>@RobFrankJr</td>
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Herald</td>
-                <td>jones</td>
-                <td>@Rhjones1234</td>
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td>howie</td>
-                <td>martin</td>
-                <td>@Rhman65</td>
-              </tr>
-              <tr>
-                <th scope="row">4</th>
-                <td>R.J</td>
-                <td>Squillie</td>
-                <td>@Rsquillie</td>
-              </tr>
-              <tr>
-                <th scope="row">5</th>
-                <td>Carmen</td>
-                <td>Baldauf</td>
-                <td>@cbnew</td>
-              </tr>
-            </tbody>
-          </table>
-
         </main>
       </div>
+
+
+      <div class="card-group">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">ID</h5>
+            <p class="card-text">Email</p>
+            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+          </div>
+        </div>
+      </div>
+
     </div>
+
   );
 }
 
-
+export default AdminPage

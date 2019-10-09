@@ -40,7 +40,7 @@ export class MainNavBar extends Component {
       <main>
         <header>
           <Navbar
-            className="navbar-expand-sm navbar-toggleable-sm ng-white border-bottom box-shadow mb-3"
+            className="navbar-expand-sm ng-white border-bottom box-shadow mb-3"
             light
           >
             <NavbarBrand tag={Link} to="/Game/id">
@@ -55,12 +55,8 @@ export class MainNavBar extends Component {
                 </NavLink>
               </NavItem>{' '}
               <NavItem>
-                <NavLink tag={Link} className="text-dark" to="/logout">
-                  Logout
-                </NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink tag={Link} className="text-dark" to="/AdminPage">
+                <NavLink tag={Link} className="text-dark" to="/admin">
+
                   Admins
                 </NavLink>
               </NavItem>
