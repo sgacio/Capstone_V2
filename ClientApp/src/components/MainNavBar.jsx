@@ -56,6 +56,7 @@ export class MainNavBar extends Component {
               </NavItem>{' '}
               <NavItem>
                 <NavLink tag={Link} className="text-dark" to="/admin">
+
                   Admins
                 </NavLink>
               </NavItem>
