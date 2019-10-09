@@ -287,7 +287,7 @@ const Home = props => {
     }
 
     const resp = await axios.post(
-      'https://coffee-clicker.herokuapp.com/api/PlayerStat',
+      'https://coffee-clicker.herokuapp.com/api/Object',
       data
     )
 
