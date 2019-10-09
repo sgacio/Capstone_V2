@@ -63,7 +63,9 @@ export const AdminPage = () => {
         </main>
       </div>
 
-      <div className="card-deck d-md-block">
+      {/* <div className="card-deck">
+
+
         <div className="card mb-4 ">
           <div className="card-body">
             <p className="card-text">Id</p>
@@ -71,34 +73,7 @@ export const AdminPage = () => {
             <p className="card-text">Handle</p>
           </div>
         </div>
-        <div className="card mb-4">
-          <div className="card-body">
-            <p className="card-text">Id</p>
-            <p className="card-text">Email</p>
-            <p className="card-text">Handle</p>
-          </div>
-        </div>
-        <div className="card mb-4">
-          <div className="card-body">
-            <p className="card-text">Id</p>
-            <p className="card-text">Email</p>
-            <p className="card-text">Handle</p>
-          </div>
-        </div>
-        <div className="card mb-4">
-          <div className="card-body">
-            <p className="card-text">Id</p>
-            <p className="card-text">Email</p>
-            <p className="card-text">Handle</p>
-          </div>
-        </div>
-        <div className="card mb-4">
-          <div className="card-body">
-            <p className="card-text">Id</p>
-            <p className="card-text">Email</p>
-            <p className="card-text">Handle</p>
-          </div>
-        </div>
+
         <div className="card mb-4">
           <div className="card-body">
             <p className="card-text">Id</p>
@@ -107,7 +82,40 @@ export const AdminPage = () => {
           </div>
         </div>
 
+
+        <div className="card mb-4">
+          <div className="card-body">
+            <p className="card-text">Id</p>
+            <p className="card-text">Email</p>
+            <p className="card-text">Handle</p>
+          </div>
+        </div>
+
+      </div> */}
+      <div class="card-group">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">ID</h5>
+            <p class="card-text">Email</p>
+            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Card title</h5>
+            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
+            <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+          </div>
+        </div>
       </div>
+
     </div>
 
   );
