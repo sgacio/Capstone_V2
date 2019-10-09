@@ -63,35 +63,7 @@ export const AdminPage = () => {
         </main>
       </div>
 
-      {/* <div className="card-deck">
 
-
-        <div className="card mb-4 ">
-          <div className="card-body">
-            <p className="card-text">Id</p>
-            <p className="card-text">Email</p>
-            <p className="card-text">Handle</p>
-          </div>
-        </div>
-
-        <div className="card mb-4">
-          <div className="card-body">
-            <p className="card-text">Id</p>
-            <p className="card-text">Email</p>
-            <p className="card-text">Handle</p>
-          </div>
-        </div>
-
-
-        <div className="card mb-4">
-          <div className="card-body">
-            <p className="card-text">Id</p>
-            <p className="card-text">Email</p>
-            <p className="card-text">Handle</p>
-          </div>
-        </div>
-
-      </div> */}
       <div class="card-group">
         <div class="card">
           <div class="card-body">
