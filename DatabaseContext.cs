@@ -29,6 +29,7 @@ namespace capstone_v2
       if (!optionsBuilder.IsConfigured)
       {
         var envConn = Environment.GetEnvironmentVariable("DATABASE_URL");
+
         var conn = "server=localhost;database=CAPStoneDatabase;User Id=postgres;Password=1Gmanrocks4";
         if (envConn != null)
         {

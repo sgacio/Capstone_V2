@@ -40,7 +40,7 @@ export class MainNavBar extends Component {
       <main>
         <header>
           <Navbar
-            className="navbar-expand-sm navbar-toggleable-sm ng-white border-bottom box-shadow mb-3"
+            className="navbar-expand-sm ng-white border-bottom box-shadow mb-3"
             light
           >
             <NavbarBrand tag={Link} to="/Game/id">
