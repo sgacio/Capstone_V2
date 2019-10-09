@@ -2,6 +2,7 @@
 using System.Text.RegularExpressions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Capstone_V2.Models;
 
 namespace capstone_v2
 {
@@ -29,7 +30,7 @@ namespace capstone_v2
       {
         var envConn = Environment.GetEnvironmentVariable("DATABASE_URL");
 #warning Be sure to update to your correct connection string to the point to the correct database
-        var conn = "server=localhost;database=SdgTemplate";
+        var conn = "server=localhost;database=CAPStoneDatabase;User Id=postgres;Password=1Gmanrocks4";
         if (envConn != null)
         {
           conn = ConvertPostConnectionToConnectionString(envConn);
@@ -44,5 +45,8 @@ namespace capstone_v2
     {
       modelBuilder.HasAnnotation("ProductVersion", "2.2.0-rtm-35687");
     }
+
+    public DbSet<PlayerStat> PlayerStats { get; set; }
+    public DbSet<SingleGameSave> SingleGameSave { get; set; }
   }
 }
