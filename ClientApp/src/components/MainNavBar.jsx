@@ -55,13 +55,8 @@ export class MainNavBar extends Component {
                 </NavLink>
               </NavItem>{' '}
               <NavItem>
-                <NavLink tag={Link} className="text-dark" to="/logout">
-                  Logout
-                </NavLink>
-              </NavItem>
-              <NavItem>
-                <NavLink tag={Link} className="text-dark" to="/AdminPage">
-                  Admins
+                <NavLink tag={Link} className="text-dark" to="/admin">
+                  Admin
                 </NavLink>
               </NavItem>
             </ul>
