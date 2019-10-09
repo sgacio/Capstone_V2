@@ -1,26 +1,447 @@
-import React, { Component } from 'react';
+import React from 'react'
+import { useState, useEffect } from 'react'
+import useInterval from '../Hooks/useInterval'
+import Latest from './images/latest.png'
+import axios from 'axios'
+import './layout.css'
 
-export class Home extends Component {
-  static displayName = Home.name;
+const Home = props => {
+  // let static displayName = Home.name
 
-  render () {
-    return (
-      <div>
-        <h1>Hello, world!</h1>
-        <p>Welcome to your new single-page application, built with:</p>
-        <ul>
-          <li><a href='https://get.asp.net/'>ASP.NET Core</a> and <a href='https://msdn.microsoft.com/en-us/library/67ef8sbd.aspx'>C#</a> for cross-platform server-side code</li>
-          <li><a href='https://facebook.github.io/react/'>React</a> for client-side code</li>
-          <li><a href='http://getbootstrap.com/'>Bootstrap</a> for layout and styling</li>
-        </ul>
-        <p>To help you get started, we have also set up:</p>
-        <ul>
-          <li><strong>Client-side navigation</strong>. For example, click <em>Counter</em> then <em>Back</em> to return here.</li>
-          <li><strong>Development server integration</strong>. In development mode, the development server from <code>create-react-app</code> runs in the background automatically, so your client-side resources are dynamically built on demand and the page refreshes when you modify any file.</li>
-          <li><strong>Efficient production builds</strong>. In production mode, development-time features are disabled, and your <code>dotnet publish</code> configuration produces minified, efficiently bundled JavaScript files.</li>
-        </ul>
-        <p>The <code>ClientApp</code> subdirectory is a standard React application based on the <code>create-react-app</code> template. If you open a command prompt in that directory, you can run <code>npm</code> commands such as <code>npm test</code> or <code>npm install</code>.</p>
-      </div>
-    );
+  const [counter, setCounter] = useState({
+    totalIncome: 0,
+    grossIncome: 0,
+    amountSpent: 0,
+    IncomePerSecond: 0
+  })
+
+  const createCounter = () => {
+    setCounter(prevCounter => {
+      prevCounter.totalIncome += 1
+      return { ...prevCounter }
+    })
   }
+
+  const [clicker, setClicker] = useState({
+    costOfASingle: 40, //from totalIncome
+    IncomePerSecond: 0.05, //the amount of cookies that will be generated per second when this item is purchased
+    numberOfClickers: 0
+  })
+
+  const [Worker, setWorker] = useState({
+    costOfASingle: 540, //from totalIncome
+    IncomePerSecond: 0.3, //the amount of cookies that will be generated per second when this item is purchased
+    numberOfWorkers: 0
+  })
+
+  const [Keurig, setKeurig] = useState({
+    costOfASingle: 1600, //from totalIncome
+    IncomePerSecond: 0.5, //the amount of cookies that will be generated per second when this item is purchased
+    numberOfKeurigs: 0
+  })
+
+  const [Espresso, setEspresso] = useState({
+    costOfASingle: 5000, //from totalIncome
+    IncomePerSecond: 0.8, //the amount of cookies that will be generated per second when this item is purchased
+    numberOfEspresso: 0
+  })
+
+  const [Id, setId] = useState()
+
+  const AddPerSecondClicker = () => {
+    if (counter.totalIncome >= clicker.costOfASingle) {
+      giveMeSeconds()
+      multiplyCost()
+      letsIncrement()
+      decreaseTotalIncome()
+      increaseTotalSpent()
+      // putToServer()
+    }
+  }
+
+  const AddWorkerStats = () => {
+    if (
+      clicker.numberOfClickers >= 1 &&
+      counter.totalIncome >= Worker.costOfASingle
+    ) {
+      createSeconds()
+      multiplyCostWorker()
+      incrementWorker()
+      decreaseTotalFromWorkerCost()
+      increaseTotalSpentFromWorker()
+      // putToServer()
+    }
+  }
+
+  const AddKeurigStats = () => {
+    if (
+      Worker.numberOfWorkers >= 10 &&
+      counter.totalIncome >= Keurig.costOfASingle
+    ) {
+      KeurigCreateSeconds()
+      multiplyCostKeurig()
+      incrementKeurig()
+      decreaseTotalIncomeFromKeurigCost()
+      increaseTotalSpentFromKeurig()
+      // putToServer()
+    }
+  }
+
+  const AddEspressoStats = () => {
+    if (
+      Keurig.numberOfKeurigs >= 10 &&
+      counter.totalIncome >= Espresso.costOfASingle
+    ) {
+      EspressoCreateSeconds()
+      multiplyCostEspresso()
+      incrementEspresso()
+      decreaseTotalIncomeFromEspressoCost()
+      increaseTotalSpentFromEspresso()
+      // putToServer()
+    }
+  }
+
+  const giveMeSeconds = () => {
+    setCounter(prevPerSecond => {
+      prevPerSecond.IncomePerSecond += clicker.IncomePerSecond
+      return { ...prevPerSecond }
+    })
+  }
+
+  const multiplyCost = () => {
+    setClicker(preCost => {
+      preCost.costOfASingle *= 1.28
+      return { ...preCost }
+    })
+  }
+
+  const letsIncrement = () => {
+    setClicker(prevCounter => {
+      prevCounter.numberOfClickers += 1
+      return { ...prevCounter }
+    })
+  }
+
+  const decreaseTotalIncome = () => {
+    setCounter(prevCounter => {
+      prevCounter.totalIncome -= clicker.costOfASingle
+      return { ...prevCounter }
+    })
+  }
+
+  const increaseTotalSpent = () => {
+    setCounter(prevAmountSpent => {
+      prevAmountSpent.amountSpent += clicker.costOfASingle
+      return { ...prevAmountSpent }
+    })
+  }
+
+  const createSeconds = () => {
+    setCounter(prevPerSecond => {
+      prevPerSecond.IncomePerSecond += Worker.IncomePerSecond
+      return { ...prevPerSecond }
+    })
+  }
+  const multiplyCostWorker = () => {
+    setWorker(preCost => {
+      preCost.costOfASingle *= 1.28
+      return { ...preCost }
+    })
+  }
+
+  const incrementWorker = () => {
+    setWorker(prevCounter => {
+      prevCounter.numberOfWorkers += 1
+      return { ...prevCounter }
+    })
+  }
+
+  const decreaseTotalFromWorkerCost = () => {
+    setCounter(prevCounter => {
+      prevCounter.totalIncome -= Worker.costOfASingle
+      return { ...prevCounter }
+    })
+  }
+
+  const increaseTotalSpentFromWorker = () => {
+    setCounter(prevAmountSpent => {
+      prevAmountSpent.amountSpent += Worker.costOfASingle
+      return { ...prevAmountSpent }
+    })
+  }
+
+  const multiplyCostKeurig = () => {
+    setKeurig(preCost => {
+      preCost.costOfASingle *= 1.28
+      return { ...preCost }
+    })
+  }
+
+  const KeurigCreateSeconds = () => {
+    setCounter(prevPerSecond => {
+      prevPerSecond.IncomePerSecond += Keurig.IncomePerSecond
+      return { ...prevPerSecond }
+    })
+  }
+
+  const incrementKeurig = () => {
+    setKeurig(prevCounter => {
+      prevCounter.numberOfKeurigs += 1
+      return { ...prevCounter }
+    })
+  }
+
+  const decreaseTotalIncomeFromKeurigCost = () => {
+    setCounter(prevCounter => {
+      prevCounter.totalIncome -= Keurig.costOfASingle
+      return { ...prevCounter }
+    })
+  }
+
+  const increaseTotalSpentFromKeurig = () => {
+    setCounter(prevAmountSpent => {
+      prevAmountSpent.amountSpent += Keurig.costOfASingle
+      return { ...prevAmountSpent }
+    })
+  }
+
+  const multiplyCostEspresso = () => {
+    setEspresso(preCost => {
+      preCost.costOfASingle *= 1.28
+      return { ...preCost }
+    })
+  }
+
+  const EspressoCreateSeconds = () => {
+    setCounter(prevPerSecond => {
+      prevPerSecond.IncomePerSecond += Espresso.IncomePerSecond
+      return { ...prevPerSecond }
+    })
+  }
+
+  const incrementEspresso = () => {
+    setEspresso(prevCounter => {
+      prevCounter.numberOfEspresso += 1
+      return { ...prevCounter }
+    })
+  }
+
+  const decreaseTotalIncomeFromEspressoCost = () => {
+    setCounter(prevCounter => {
+      prevCounter.totalIncome -= Espresso.costOfASingle
+      return { ...prevCounter }
+    })
+  }
+
+  const increaseTotalSpentFromEspresso = () => {
+    setCounter(prevAmountSpent => {
+      prevAmountSpent.amountSpent += Espresso.costOfASingle
+      return { ...prevAmountSpent }
+    })
+  }
+
+  useInterval(() => {
+    setCounter(prevPerSecond => {
+      prevPerSecond.totalIncome += prevPerSecond.IncomePerSecond
+      return { ...prevPerSecond }
+    })
+  }, 1000)
+
+  useInterval(() => {
+    counterToServer()
+  }, 30000)
+
+  const counterToServer = async () => {
+    const data = {
+      Id: Id,
+      counter: JSON.stringify(counter),
+      clicker: JSON.stringify(clicker),
+      worker: JSON.stringify(Worker),
+      Keurig: JSON.stringify(Keurig),
+      EspressoMachine: JSON.stringify(Espresso)
+    }
+
+    const resp = await axios.put(
+      `https://localhost:5001/api/Object/${Id}`,
+      data
+    )
+  }
+
+  const sendPlayerIdToSingleGameSave = async id => {
+    const resp = await axios.post('https://localhost:5001/api/SingleGameSave', {
+      PlayerId: props.match.params.id,
+      ObjectId: id
+    })
+  }
+
+  const saveToServer = async () => {
+    const data = {
+      counter: JSON.stringify(counter),
+      clicker: JSON.stringify(clicker),
+      worker: JSON.stringify(Worker),
+      Keurig: JSON.stringify(Keurig),
+      EspressoMachine: JSON.stringify(Espresso)
+    }
+
+    const resp = await axios.post('https://localhost:5001/api/Object', data)
+
+    setId(resp.data.id)
+    console.log(resp.data.id)
+    sendPlayerIdToSingleGameSave(resp.data.id)
+  }
+
+  const putToServer = async () => {
+    if (Id) {
+      const data = {
+        Id: Id,
+        counter: JSON.stringify(counter),
+        clicker: JSON.stringify(clicker),
+        worker: JSON.stringify(Worker),
+        Keurig: JSON.stringify(Keurig),
+        EspressoMachine: JSON.stringify(Espresso)
+      }
+      const resp = await axios.put(
+        `https://localhost:5001/api/Object/${Id}`,
+        data
+      )
+    }
+  }
+
+  useEffect(() => {
+    saveToServer()
+  }, [])
+
+  useEffect(() => {
+    putToServer()
+  }, [clicker, Worker, Keurig, Espresso])
+
+  return (
+    <>
+      {/* 
+        Small devices (landscape phones, 576px and up)
+        Medium devices (tablets, 768px and up)
+        Large devices (desktops, 992px and up)
+        Extra large devices (large desktops, 1200px and up) 
+        */}
+      <div className="container text-center">
+        <div className="top-container">
+          <p>
+            <span>Username</span> Coffee Shop
+          </p>
+          <p>
+            <span>{Math.round(counter.totalIncome * 100) / 100}</span> Coffee's
+            collected
+          </p>
+          <p>
+            <span>{Math.ceil(counter.IncomePerSecond * 100) / 100}</span> Cups
+            Per Second(CPS)
+          </p>
+        </div>
+        <button
+          className="btn btn-outline-dark"
+          onClick={() => createCounter()}
+        >
+          <img
+            src={Latest}
+            className="coffee-image img-fluid"
+            alt="White starbucks coffee cup"
+          ></img>
+        </button>
+
+
+        <div className="container-fluid margin">
+          <table className="table table-dark">
+            <thead>
+              <tr>
+                <th></th>
+                <th scope="col">Clicker</th>
+                <th scope="col">Worker</th>
+                <th scope="col">Keurig</th>
+                <th scope="col">Espresso Machine</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>Number Of</th>
+                <td>
+                  <p>{clicker.numberOfClickers}</p>
+                </td>
+                <td>
+                  <p>{Worker.numberOfWorkers}</p>
+                </td>
+                <td>
+                  <p>{Keurig.numberOfKeurigs}</p>
+                </td>
+                <td>
+                  <p>{Espresso.numberOfEspresso}</p>
+                </td>
+              </tr>
+            </tbody>
+            <tbody>
+              <tr>
+                <th>Cost</th>
+                <td>
+                  <p>{Math.round(clicker.costOfASingle * 100) / 100}</p>
+                </td>
+                <td>
+                  <p>{Math.round(Worker.costOfASingle * 100) / 100}</p>
+                </td>
+                <td>
+                  <p>{Math.round(Keurig.costOfASingle * 100) / 100}</p>
+                </td>
+                <td>
+                  <p>{Math.round(Espresso.costOfASingle * 100) / 100}</p>
+                </td>
+              </tr>
+              <tr>
+                <th>Purchase Button</th>
+                <td>
+                  <button
+                    className="btn btn-outline-light"
+                    onClick={() => {
+                      AddPerSecondClicker()
+                    }}
+                  >
+                    Clicking
+                  </button>
+                </td>
+                <td>
+                  <button
+                    className="btn btn-outline-light"
+                    onClick={() => {
+                      AddWorkerStats()
+                    }}
+                  >
+                    Worker
+                  </button>
+                </td>
+                <td>
+                  <button
+                    className="btn btn-outline-light"
+                    onClick={() => {
+                      AddKeurigStats()
+                    }}
+                  >
+                    Keurig
+                  </button>
+                </td>
+                <td>
+                  <button
+                    className="btn btn-outline-light"
+                    onClick={() => {
+                      AddEspressoStats()
+                    }}
+                  >
+                    Espresso
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </>
+  )
 }
+
+export default Home

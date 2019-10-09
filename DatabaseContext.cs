@@ -29,8 +29,8 @@ namespace capstone_v2
       if (!optionsBuilder.IsConfigured)
       {
         var envConn = Environment.GetEnvironmentVariable("DATABASE_URL");
-#warning Be sure to update to your correct connection string to the point to the correct database
-        var conn = "server=localhost;database=CAPStoneDatabase;User Id=postgres;Password=1Gmanrocks4";
+
+        var conn = "server=localhost;database=CAPStoneDatabase;User Id=postgres;";
         if (envConn != null)
         {
           conn = ConvertPostConnectionToConnectionString(envConn);
@@ -47,6 +47,7 @@ namespace capstone_v2
     }
 
     public DbSet<PlayerStat> PlayerStats { get; set; }
-    public DbSet<SingleGameSave> SingleGameSave { get; set; }
+    public DbSet<SingleGameSave> SingleGameSaves { get; set; }
+    public DbSet<Objects> Object { get; set; }
   }
 }

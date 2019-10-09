@@ -1,0 +1,16 @@
+.coffee-image {
+  height: 13rem;
+  width: 19rem;
+}
+
+.margin {
+  margin-top: 1rem;
+}
+
+.top-container {
+  margin-top: 1rem;
+}
+
+#root {
+  background-color: rgb(202, 199, 199);
+}

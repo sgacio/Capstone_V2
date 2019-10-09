@@ -9,6 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 using Newtonsoft.Json;
 using Swashbuckle.AspNetCore.Swagger;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace capstone_v2
 {
@@ -26,6 +27,19 @@ namespace capstone_v2
     // This method gets called by the runtime. Use this method to add services to the container.
     public void ConfigureServices(IServiceCollection services)
     {
+      services.AddAuthentication(options =>
+    {
+      options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+      options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+    }).AddJwtBearer(options =>
+    {
+      options.Authority = "http://dev-a3avdr6y.auth0.com";
+      options.Audience = "RVzD91hKyrrY7dVuklR8K9swQLtdSxYY";
+    });
+
+
+
+
       services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2)
        .AddJsonOptions(options =>
       {
