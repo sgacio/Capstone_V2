@@ -6,7 +6,6 @@ import Home from './components/Home'
 import AdminPage from './components/AdminPage'
 
 import Login from './components/Login'
-import { AdminPage } from './components/AdminPage'
 
 export default class App extends Component {
   static displayName = App.name
