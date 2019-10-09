@@ -1,6 +1,6 @@
 .coffee-image {
-  height: 17rem;
-  width: 21rem;
+  height: 13rem;
+  width: 19rem;
 }
 
 .margin {
@@ -11,6 +11,6 @@
   margin-top: 1rem;
 }
 
-/* .root {
-  background-color: gray;
-} */
+#root {
+  background-color: rgb(202, 199, 199);
+}

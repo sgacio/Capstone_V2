@@ -5,7 +5,7 @@ import Latest from './images/latest.png'
 import axios from 'axios'
 import './layout.css'
 
-const Home = () => {
+const Home = props => {
   // let static displayName = Home.name
 
   const [counter, setCounter] = useState({
@@ -267,6 +267,13 @@ const Home = () => {
     )
   }
 
+  const sendPlayerIdToSingleGameSave = async id => {
+    const resp = await axios.post('https://localhost:5001/api/SingleGameSave', {
+      PlayerId: props.match.params.id,
+      ObjectId: id
+    })
+  }
+
   const saveToServer = async () => {
     const data = {
       counter: JSON.stringify(counter),
@@ -280,21 +287,24 @@ const Home = () => {
 
     setId(resp.data.id)
     console.log(resp.data.id)
+    sendPlayerIdToSingleGameSave(resp.data.id)
   }
 
   const putToServer = async () => {
-    const data = {
-      Id: Id,
-      counter: JSON.stringify(counter),
-      clicker: JSON.stringify(clicker),
-      worker: JSON.stringify(Worker),
-      Keurig: JSON.stringify(Keurig),
-      EspressoMachine: JSON.stringify(Espresso)
+    if (Id) {
+      const data = {
+        Id: Id,
+        counter: JSON.stringify(counter),
+        clicker: JSON.stringify(clicker),
+        worker: JSON.stringify(Worker),
+        Keurig: JSON.stringify(Keurig),
+        EspressoMachine: JSON.stringify(Espresso)
+      }
+      const resp = await axios.put(
+        `https://localhost:5001/api/Object/${Id}`,
+        data
+      )
     }
-    const resp = await axios.put(
-      `https://localhost:5001/api/Object/${Id}`,
-      data
-    )
   }
 
   useEffect(() => {
@@ -337,6 +347,8 @@ const Home = () => {
             alt="White starbucks coffee cup"
           ></img>
         </button>
+
+
         <div className="container-fluid margin">
           <table className="table table-dark">
             <thead>

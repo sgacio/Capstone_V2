@@ -1,13 +1,18 @@
-import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Switch, Link, NavLink } from 'react-router-dom'
+import React, { Component } from 'react'
+import {
+  BrowserRouter as Router,
+  Route,
+  Switch,
+  Link,
+  NavLink
+} from 'react-router-dom'
 import {
   Collapse,
   Container,
   Navbar,
   NavbarBrand,
   NavbarToggler,
-  NavItem,
-
+  NavItem
 } from 'reactstrap'
 
 import './MainNavBar.scss'
@@ -15,7 +20,6 @@ import { AdminPage } from './AdminPage'
 import Home from './Home'
 
 export class MainNavBar extends Component {
-
   constructor(props) {
     super(props)
 
@@ -36,36 +40,26 @@ export class MainNavBar extends Component {
       <main>
         <header>
           <Navbar
-            className="navbar-expand-sm navbar-toggleable-sm ng-white border-bottom box-shadow mb-3"
+            className="navbar-expand-sm ng-white border-bottom box-shadow mb-3"
             light
           >
-
-            <NavbarBrand tag={Link} to="/">
+            <NavbarBrand tag={Link} to="/Game/id">
               CoffeeClicker
             </NavbarBrand>
             <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
 
             <ul className="navbar-nav flex-grow">
               <NavItem>
-                <NavLink tag={Link} className="text-dark" to="/Login">
+                <NavLink tag={Link} className="text-dark" to="/">
                   Login
-                  </NavLink>
+                </NavLink>
               </NavItem>{' '}
-
               <NavItem>
-                <NavLink tag={Link} className="text-dark" to="/logout">
-                  Logout
-                  </NavLink>
-              </NavItem>
-
-              <NavItem>
-                <NavLink tag={Link} className="text-dark" to="/AdminPage">
+                <NavLink tag={Link} className="text-dark" to="/admin">
                   Admins
-                  </NavLink>
+                </NavLink>
               </NavItem>
             </ul>
-
-
           </Navbar>
         </header>
         <Router>
