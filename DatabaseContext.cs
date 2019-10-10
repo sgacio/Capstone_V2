@@ -30,7 +30,7 @@ namespace capstone_v2
       {
         var envConn = Environment.GetEnvironmentVariable("DATABASE_URL");
 
-        var conn = "server=localhost;database=CAPStoneDatabase;User Id=postgres;";
+        var conn = "server=localhost;database=CAPStoneDatabase;";
         if (envConn != null)
         {
           conn = ConvertPostConnectionToConnectionString(envConn);
