@@ -28,13 +28,10 @@ const Login = () => {
   }
 
   const putUserOnServer = async result => {
-    const resp = await Axios.post(
-      'https://coffee-clicker.herokuapp.com/api/PlayerStat',
-      {
-        ProperName: result.user.displayName,
-        Email: result.user.email
-      }
-    )
+    const resp = await Axios.post('https://localhost:5001/api/PlayerStat', {
+      ProperName: result.user.displayName,
+      Email: result.user.email
+    })
     setId(resp.data.id)
     console.log(resp.data.id)
     // react router dom redirect
@@ -45,12 +42,10 @@ const Login = () => {
       {id ? (
         <Redirect to={`/Game/${id}`}></Redirect>
       ) : (
-
-          <button onClick={() => signInWithPopup()} type="">
-            Sign in
+        <button onClick={() => signInWithPopup()} type="">
+          Sign in
         </button>
-        )}
-
+      )}
     </div>
   )
 }

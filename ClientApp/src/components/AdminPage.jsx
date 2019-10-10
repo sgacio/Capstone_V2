@@ -6,10 +6,8 @@ export const AdminPage = () => {
   const [allInfo, setAllInfo] = useState()
 
   const grabAdminInformation = async () => {
-    const resp = await axios.get(
-      'https://coffee-clicker.herokuapp.com/api/PlayerStat'
-    )
-    // console.log(resp)
+    const resp = await axios.get('https://localhost:5001/api/PlayerStat')
+    console.log(resp)
     setAllInfo(resp.data)
   }
 
@@ -19,6 +17,7 @@ export const AdminPage = () => {
 
   return (
     <div>
+      {console.log(allInfo)}
       <div className="main-card-container">
         <main className="container-fluid">
           <div className="card-group">
@@ -94,40 +93,26 @@ export const AdminPage = () => {
         </main>
       </div>
 
-      <div class="card-group">
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">
-              This is a wider card with supporting text below as a natural
-              lead-in to additional content. This content is a little bit
-              longer.
-            </p>
-            <p class="card-text">
-              <small class="text-muted">Last updated 3 mins ago</small>
-            </p>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">ID</h5>
-            <p class="card-text">Email</p>
-            <p class="card-text">
-              <small class="text-muted">Last updated 3 mins ago</small>
-            </p>
-          </div>
-        </div>
-        <div class="card">
-          <div class="card-body">
-            <h5 class="card-title">Card title</h5>
-            <p class="card-text">
-              This is a wider card with supporting text below as a natural
-              lead-in to additional content. This card has even longer content
-              than the first to show that equal height action.
-            </p>
-            <p class="card-text">
-              <small class="text-muted">Last updated 3 mins ago</small>
-            </p>
+      <div>
+        <div class="container-fluid">
+          <div class="row justify-content-center">
+            {allInfo &&
+              allInfo.map((e, i) => {
+                return (
+                  <div
+                    style={{ margin: 0.2 + 'rem' }}
+                    class="card-group col-xs-1"
+                  >
+                    <div class="card text-left">
+                      <div class="card-body">
+                        <p class="card-text">Id - {e.id}</p>
+                        <p class="card-title">Name - {e.properName}</p>
+                        <p class="card-text">Email - {e.email}</p>
+                      </div>
+                    </div>
+                  </div>
+                )
+              })}
           </div>
         </div>
       </div>

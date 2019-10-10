@@ -262,19 +262,16 @@ const Home = props => {
     }
 
     const resp = await axios.put(
-      `https://coffee-clicker.herokuapp.com/api/Object/${Id}`,
+      `https://localhost:5001/api/Object/${Id}`,
       data
     )
   }
 
   const sendPlayerIdToSingleGameSave = async id => {
-    const resp = await axios.post(
-      'https://coffee-clicker.herokuapp.com/api/SingleGameSave',
-      {
-        PlayerId: props.match.params.id,
-        ObjectId: id
-      }
-    )
+    const resp = await axios.post('https://localhost:5001/api/SingleGameSave', {
+      PlayerId: props.match.params.id,
+      ObjectId: id
+    })
   }
 
   const saveToServer = async () => {
@@ -286,10 +283,7 @@ const Home = props => {
       EspressoMachine: JSON.stringify(Espresso)
     }
 
-    const resp = await axios.post(
-      'https://coffee-clicker.herokuapp.com/api/Object',
-      data
-    )
+    const resp = await axios.post('https://localhost:5001/api/Object', data)
 
     setId(resp.data.id)
     console.log(resp.data.id)
@@ -308,7 +302,7 @@ const Home = props => {
         EspressoMachine: JSON.stringify(Espresso)
       }
       const resp = await axios.put(
-        `https://coffee-clicker.herokuapp.com/api/Object/${Id}`,
+        `https://localhost:5001/api/Object/${Id}`,
         data
       )
     }
@@ -354,7 +348,6 @@ const Home = props => {
             alt="White starbucks coffee cup"
           ></img>
         </button>
-
 
         <div className="container-fluid margin">
           <table className="table table-dark">
