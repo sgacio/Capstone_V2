@@ -6,7 +6,9 @@ export const AdminPage = () => {
   const [allInfo, setAllInfo] = useState()
 
   const grabAdminInformation = async () => {
-    const resp = await axios.get('https://localhost:5001/api/PlayerStat')
+    const resp = await axios.get(
+      'https://coffee-clicker.herokuapp.com/api/PlayerStat'
+    )
     console.log(resp)
     setAllInfo(resp.data)
   }
