@@ -2,6 +2,7 @@ import React from 'react'
 import { useState, useEffect } from 'react'
 import useInterval from '../Hooks/useInterval'
 import Latest from './images/latest.png'
+import Table from './Table'
 import axios from 'axios'
 import './layout.css'
 
@@ -25,26 +26,28 @@ const Home = props => {
   const [clicker, setClicker] = useState({
     costOfASingle: 40, //from totalIncome
     IncomePerSecond: 0.05, //the amount of cookies that will be generated per second when this item is purchased
-    numberOfClickers: 0
+    numberOf: 0
   })
 
   const [Worker, setWorker] = useState({
     costOfASingle: 540, //from totalIncome
     IncomePerSecond: 0.3, //the amount of cookies that will be generated per second when this item is purchased
-    numberOfWorkers: 0
+    numberOf: 0
   })
 
   const [Keurig, setKeurig] = useState({
     costOfASingle: 1600, //from totalIncome
     IncomePerSecond: 0.5, //the amount of cookies that will be generated per second when this item is purchased
-    numberOfKeurigs: 0
+    numberOf: 0
   })
 
   const [Espresso, setEspresso] = useState({
     costOfASingle: 5000, //from totalIncome
     IncomePerSecond: 0.8, //the amount of cookies that will be generated per second when this item is purchased
-    numberOfEspresso: 0
+    numberOf: 0
   })
+
+  const ObjectArray = [clicker, Worker, Keurig, Espresso]
 
   const [Id, setId] = useState()
 
@@ -55,41 +58,32 @@ const Home = props => {
       letsIncrement()
       decreaseTotalIncome()
       increaseTotalSpent()
-      // putToServer()
     }
   }
 
   const AddWorkerStats = () => {
-    if (
-      clicker.numberOfClickers >= 1 &&
-      counter.totalIncome >= Worker.costOfASingle
-    ) {
+    if (clicker.numberOf >= 1 && counter.totalIncome >= Worker.costOfASingle) {
       createSeconds()
       multiplyCostWorker()
       incrementWorker()
       decreaseTotalFromWorkerCost()
       increaseTotalSpentFromWorker()
-      // putToServer()
     }
   }
 
   const AddKeurigStats = () => {
-    if (
-      Worker.numberOfWorkers >= 10 &&
-      counter.totalIncome >= Keurig.costOfASingle
-    ) {
+    if (Worker.numberOf >= 10 && counter.totalIncome >= Keurig.costOfASingle) {
       KeurigCreateSeconds()
       multiplyCostKeurig()
       incrementKeurig()
       decreaseTotalIncomeFromKeurigCost()
       increaseTotalSpentFromKeurig()
-      // putToServer()
     }
   }
 
   const AddEspressoStats = () => {
     if (
-      Keurig.numberOfKeurigs >= 10 &&
+      Keurig.numberOf >= 10 &&
       counter.totalIncome >= Espresso.costOfASingle
     ) {
       EspressoCreateSeconds()
@@ -97,7 +91,6 @@ const Home = props => {
       incrementEspresso()
       decreaseTotalIncomeFromEspressoCost()
       increaseTotalSpentFromEspresso()
-      // putToServer()
     }
   }
 
@@ -108,16 +101,9 @@ const Home = props => {
     })
   }
 
-  const multiplyCost = () => {
-    setClicker(preCost => {
-      preCost.costOfASingle *= 1.28
-      return { ...preCost }
-    })
-  }
-
   const letsIncrement = () => {
     setClicker(prevCounter => {
-      prevCounter.numberOfClickers += 1
+      prevCounter.numberOf += 1
       return { ...prevCounter }
     })
   }
@@ -142,16 +128,32 @@ const Home = props => {
       return { ...prevPerSecond }
     })
   }
+
+  const multiplyCostEspresso = () => {
+    multiply(setEspresso, 'costOfASingle')
+  }
+
+  const multiplyCostKeurig = () => {
+    multiply(setKeurig, 'costOfASingle')
+  }
+
   const multiplyCostWorker = () => {
-    setWorker(preCost => {
-      preCost.costOfASingle *= 1.28
-      return { ...preCost }
+    multiply(setWorker, 'costOfASingle')
+  }
+  const multiplyCost = () => {
+    multiply(setClicker, 'costOfASingle')
+  }
+
+  const multiply = (set, key) => {
+    set(prev => {
+      prev[key] *= 1.28
+      return { ...prev }
     })
   }
 
   const incrementWorker = () => {
     setWorker(prevCounter => {
-      prevCounter.numberOfWorkers += 1
+      prevCounter.numberOf += 1
       return { ...prevCounter }
     })
   }
@@ -170,12 +172,12 @@ const Home = props => {
     })
   }
 
-  const multiplyCostKeurig = () => {
-    setKeurig(preCost => {
-      preCost.costOfASingle *= 1.28
-      return { ...preCost }
-    })
-  }
+  // const multiplyCostKeurig = () => {
+  //   setKeurig(preCost => {
+  //     preCost.costOfASingle *= 1.28
+  //     return { ...preCost }
+  //   })
+  // }
 
   const KeurigCreateSeconds = () => {
     setCounter(prevPerSecond => {
@@ -186,7 +188,7 @@ const Home = props => {
 
   const incrementKeurig = () => {
     setKeurig(prevCounter => {
-      prevCounter.numberOfKeurigs += 1
+      prevCounter.numberOf += 1
       return { ...prevCounter }
     })
   }
@@ -205,12 +207,12 @@ const Home = props => {
     })
   }
 
-  const multiplyCostEspresso = () => {
-    setEspresso(preCost => {
-      preCost.costOfASingle *= 1.28
-      return { ...preCost }
-    })
-  }
+  // const multiplyCostEspresso = () => {
+  //   setEspresso(preCost => {
+  //     preCost.costOfASingle *= 1.28
+  //     return { ...preCost }
+  //   })
+  // }
 
   const EspressoCreateSeconds = () => {
     setCounter(prevPerSecond => {
@@ -221,7 +223,7 @@ const Home = props => {
 
   const incrementEspresso = () => {
     setEspresso(prevCounter => {
-      prevCounter.numberOfEspresso += 1
+      prevCounter.numberOf += 1
       return { ...prevCounter }
     })
   }
@@ -369,35 +371,17 @@ const Home = props => {
             <tbody>
               <tr>
                 <th>Number Of</th>
-                <td>
-                  <p>{clicker.numberOfClickers}</p>
-                </td>
-                <td>
-                  <p>{Worker.numberOfWorkers}</p>
-                </td>
-                <td>
-                  <p>{Keurig.numberOfKeurigs}</p>
-                </td>
-                <td>
-                  <p>{Espresso.numberOfEspresso}</p>
-                </td>
+                {ObjectArray.map((e, i) => {
+                  return <Table p={e.numberOf} />
+                })}
               </tr>
             </tbody>
             <tbody>
               <tr>
                 <th>Cost</th>
-                <td>
-                  <p>{Math.round(clicker.costOfASingle * 100) / 100}</p>
-                </td>
-                <td>
-                  <p>{Math.round(Worker.costOfASingle * 100) / 100}</p>
-                </td>
-                <td>
-                  <p>{Math.round(Keurig.costOfASingle * 100) / 100}</p>
-                </td>
-                <td>
-                  <p>{Math.round(Espresso.costOfASingle * 100) / 100}</p>
-                </td>
+                {ObjectArray.map((e, i) => {
+                  return <Table p={Math.round(e.costOfASingle * 100) / 100} />
+                })}
               </tr>
               <tr>
                 <th>Purchase Button</th>
