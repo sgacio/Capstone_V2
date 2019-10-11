@@ -7,8 +7,6 @@ import axios from 'axios'
 import './layout.css'
 
 const Home = props => {
-  // let static displayName = Home.name
-
   const [counter, setCounter] = useState({
     totalIncome: 0,
     grossIncome: 0,
@@ -16,34 +14,27 @@ const Home = props => {
     IncomePerSecond: 0
   })
 
-  const createCounter = () => {
-    setCounter(prevCounter => {
-      prevCounter.totalIncome += 1
-      return { ...prevCounter }
-    })
-  }
-
   const [clicker, setClicker] = useState({
-    costOfASingle: 40, //from totalIncome
-    IncomePerSecond: 0.05, //the amount of cookies that will be generated per second when this item is purchased
+    costOfASingle: 40,
+    IncomePerSecond: 0.05,
     numberOf: 0
   })
 
   const [Worker, setWorker] = useState({
-    costOfASingle: 540, //from totalIncome
-    IncomePerSecond: 0.3, //the amount of cookies that will be generated per second when this item is purchased
+    costOfASingle: 540,
+    IncomePerSecond: 0.3,
     numberOf: 0
   })
 
   const [Keurig, setKeurig] = useState({
-    costOfASingle: 1600, //from totalIncome
-    IncomePerSecond: 0.5, //the amount of cookies that will be generated per second when this item is purchased
+    costOfASingle: 1600,
+    IncomePerSecond: 0.5,
     numberOf: 0
   })
 
   const [Espresso, setEspresso] = useState({
-    costOfASingle: 5000, //from totalIncome
-    IncomePerSecond: 0.8, //the amount of cookies that will be generated per second when this item is purchased
+    costOfASingle: 5000,
+    IncomePerSecond: 0.8,
     numberOf: 0
   })
 
@@ -53,17 +44,17 @@ const Home = props => {
 
   const AddPerSecondClicker = () => {
     if (counter.totalIncome >= clicker.costOfASingle) {
-      giveMeSeconds()
+      giveMeSecondsClicker()
       multiplyCost()
       letsIncrement()
-      decreaseTotalIncome()
-      increaseTotalSpent()
+      decreaseTotalIncomeClicker()
+      increaseTotalSpentClicker()
     }
   }
 
   const AddWorkerStats = () => {
     if (clicker.numberOf >= 1 && counter.totalIncome >= Worker.costOfASingle) {
-      createSeconds()
+      giveMeSecondsWorker()
       multiplyCostWorker()
       incrementWorker()
       decreaseTotalFromWorkerCost()
@@ -94,54 +85,60 @@ const Home = props => {
     }
   }
 
-  const giveMeSeconds = () => {
-    setCounter(prevPerSecond => {
-      prevPerSecond.IncomePerSecond += clicker.IncomePerSecond
-      return { ...prevPerSecond }
+  // const giveMeSeconds = () => {
+  //   setCounter(prevPerSecond => {
+  //     prevPerSecond.IncomePerSecond += clicker.IncomePerSecond
+  //     return { ...prevPerSecond }
+  //   })
+  // }
+
+  // const letsIncrement = () => {
+  //   setClicker(prevCounter => {
+  //     prevCounter.numberOf += 1
+  //     return { ...prevCounter }
+  //   })
+  // }
+
+  // const decreaseTotalIncome = () => {
+  //   setCounter(prevCounter => {
+  //     prevCounter.totalIncome -= clicker.costOfASingle
+  //     return { ...prevCounter }
+  //   })
+  // }
+
+  // const increaseTotalSpent = () => {
+  //   setCounter(prevAmountSpent => {
+  //     prevAmountSpent.amountSpent += clicker.costOfASingle
+  //     return { ...prevAmountSpent }
+  //   })
+  // }
+
+  // const createSeconds = () => {
+  //   setCounter(prevPerSecond => {
+  //     prevPerSecond.IncomePerSecond += Worker.IncomePerSecond
+  //     return { ...prevPerSecond }
+  //   })
+  // }
+  const giveMeSeconds = (set, key, kai) => {
+    set(prev => {
+      prev[key] += kai[key]
     })
   }
 
-  const letsIncrement = () => {
-    setClicker(prevCounter => {
-      prevCounter.numberOf += 1
-      return { ...prevCounter }
-    })
+  const giveMeSecondsClicker = () => {
+    giveMeSeconds(setCounter, 'IncomePerSecond', clicker)
   }
 
-  const decreaseTotalIncome = () => {
-    setCounter(prevCounter => {
-      prevCounter.totalIncome -= clicker.costOfASingle
-      return { ...prevCounter }
-    })
+  const giveMeSecondsWorker = () => {
+    giveMeSeconds(setCounter, 'IncomePerSecond', Worker)
   }
 
-  const increaseTotalSpent = () => {
-    setCounter(prevAmountSpent => {
-      prevAmountSpent.amountSpent += clicker.costOfASingle
-      return { ...prevAmountSpent }
-    })
+  const KeurigCreateSeconds = () => {
+    giveMeSeconds(setCounter, 'IncomePerSecond', Keurig)
   }
 
-  const createSeconds = () => {
-    setCounter(prevPerSecond => {
-      prevPerSecond.IncomePerSecond += Worker.IncomePerSecond
-      return { ...prevPerSecond }
-    })
-  }
-
-  const multiplyCostEspresso = () => {
-    multiply(setEspresso, 'costOfASingle')
-  }
-
-  const multiplyCostKeurig = () => {
-    multiply(setKeurig, 'costOfASingle')
-  }
-
-  const multiplyCostWorker = () => {
-    multiply(setWorker, 'costOfASingle')
-  }
-  const multiplyCost = () => {
-    multiply(setClicker, 'costOfASingle')
+  const EspressoCreateSeconds = () => {
+    giveMeSeconds(setCounter, 'IncomePerSecond', Espresso)
   }
 
   const multiply = (set, key) => {
@@ -151,26 +148,118 @@ const Home = props => {
     })
   }
 
-  const incrementWorker = () => {
-    setWorker(prevCounter => {
-      prevCounter.numberOf += 1
+  const multiplyCost = () => {
+    multiply(setClicker, 'costOfASingle')
+  }
+
+  const multiplyCostWorker = () => {
+    multiply(setWorker, 'costOfASingle')
+  }
+
+  const multiplyCostKeurig = () => {
+    multiply(setKeurig, 'costOfASingle')
+  }
+
+  const multiplyCostEspresso = () => {
+    multiply(setEspresso, 'costOfASingle')
+  }
+
+  const increment = (set, key) => {
+    set(prev => {
+      prev[key] += 1
+      return { ...prev }
+    })
+  }
+
+  const createCounter = () => {
+    setCounter(prevCounter => {
+      prevCounter.totalIncome += 1
       return { ...prevCounter }
     })
+  }
+
+  const letsIncrement = () => {
+    increment(setClicker, 'numberOf')
+  }
+
+  const incrementWorker = () => {
+    increment(setWorker, 'numberOf')
+  }
+
+  const incrementKeurig = () => {
+    increment(setKeurig, 'numberOf')
+  }
+
+  const incrementEspresso = () => {
+    increment(setEspresso, 'numberOf')
+  }
+
+  const decreaseTotalIncome = (set, key, kai, ken) => {
+    set(prev => {
+      prev[key] -= kai[ken]
+      return { ...prev }
+    })
+  }
+
+  const decreaseTotalIncomeClicker = () => {
+    decreaseTotalIncome(setCounter, 'totalIncome', clicker, 'costOfASingle')
   }
 
   const decreaseTotalFromWorkerCost = () => {
-    setCounter(prevCounter => {
-      prevCounter.totalIncome -= Worker.costOfASingle
-      return { ...prevCounter }
+    decreaseTotalIncome(setCounter, 'totalIncome', Worker, 'costOfASingle')
+  }
+
+  const decreaseTotalIncomeFromKeurigCost = () => {
+    decreaseTotalIncome(setCounter, 'totalIncome', Keurig, 'costOfASingle')
+  }
+
+  const decreaseTotalIncomeFromEspressoCost = () => {
+    decreaseTotalIncome(setCounter, 'totalIncome', Espresso, 'costOfASingle')
+  }
+
+  const increaseTotalSpent = (set, key, kai, ken) => {
+    set(prev => {
+      prev[key] += kai[ken]
+      return { ...prev }
     })
   }
 
-  const increaseTotalSpentFromWorker = () => {
-    setCounter(prevAmountSpent => {
-      prevAmountSpent.amountSpent += Worker.costOfASingle
-      return { ...prevAmountSpent }
-    })
+  const increaseTotalSpentClicker = () => {
+    increaseTotalSpent(setCounter, 'amountSpent', clicker, 'costOfASingle')
   }
+
+  const increaseTotalSpentFromWorker = () => {
+    increaseTotalSpent(setCounter, 'amountSpent', Worker, 'costOfASingle')
+  }
+
+  const increaseTotalSpentFromKeurig = () => {
+    increaseTotalSpent(setCounter, 'amountSpent', Keurig, 'costOfASingle')
+  }
+
+  const increaseTotalSpentFromEspresso = () => {
+    increaseTotalSpent(setCounter, 'amountSpent', Espresso, 'costOfASingle')
+  }
+
+  // const incrementWorker = () => {
+  //   setWorker(prevCounter => {
+  //     prevCounter.numberOf += 1
+  //     return { ...prevCounter }
+  //   })
+  // }
+
+  // const decreaseTotalFromWorkerCost = () => {
+  //   setCounter(prevCounter => {
+  //     prevCounter.totalIncome -= Worker.costOfASingle
+  //     return { ...prevCounter }
+  //   })
+  // }
+
+  // const increaseTotalSpentFromWorker = () => {
+  //   setCounter(prevAmountSpent => {
+  //     prevAmountSpent.amountSpent += Worker.costOfASingle
+  //     return { ...prevAmountSpent }
+  //   })
+  // }
 
   // const multiplyCostKeurig = () => {
   //   setKeurig(preCost => {
@@ -179,33 +268,33 @@ const Home = props => {
   //   })
   // }
 
-  const KeurigCreateSeconds = () => {
-    setCounter(prevPerSecond => {
-      prevPerSecond.IncomePerSecond += Keurig.IncomePerSecond
-      return { ...prevPerSecond }
-    })
-  }
+  // const KeurigCreateSeconds = () => {
+  //   setCounter(prevPerSecond => {
+  //     prevPerSecond.IncomePerSecond += Keurig.IncomePerSecond
+  //     return { ...prevPerSecond }
+  //   })
+  // }
 
-  const incrementKeurig = () => {
-    setKeurig(prevCounter => {
-      prevCounter.numberOf += 1
-      return { ...prevCounter }
-    })
-  }
+  // const incrementKeurig = () => {
+  //   setKeurig(prevCounter => {
+  //     prevCounter.numberOf += 1
+  //     return { ...prevCounter }
+  //   })
+  // }
 
-  const decreaseTotalIncomeFromKeurigCost = () => {
-    setCounter(prevCounter => {
-      prevCounter.totalIncome -= Keurig.costOfASingle
-      return { ...prevCounter }
-    })
-  }
+  // const decreaseTotalIncomeFromKeurigCost = () => {
+  //   setCounter(prevCounter => {
+  //     prevCounter.totalIncome -= Keurig.costOfASingle
+  //     return { ...prevCounter }
+  //   })
+  // }
 
-  const increaseTotalSpentFromKeurig = () => {
-    setCounter(prevAmountSpent => {
-      prevAmountSpent.amountSpent += Keurig.costOfASingle
-      return { ...prevAmountSpent }
-    })
-  }
+  // const increaseTotalSpentFromKeurig = () => {
+  //   setCounter(prevAmountSpent => {
+  //     prevAmountSpent.amountSpent += Keurig.costOfASingle
+  //     return { ...prevAmountSpent }
+  //   })
+  // }
 
   // const multiplyCostEspresso = () => {
   //   setEspresso(preCost => {
@@ -214,33 +303,33 @@ const Home = props => {
   //   })
   // }
 
-  const EspressoCreateSeconds = () => {
-    setCounter(prevPerSecond => {
-      prevPerSecond.IncomePerSecond += Espresso.IncomePerSecond
-      return { ...prevPerSecond }
-    })
-  }
+  // const EspressoCreateSeconds = () => {
+  //   setCounter(prevPerSecond => {
+  //     prevPerSecond.IncomePerSecond += Espresso.IncomePerSecond
+  //     return { ...prevPerSecond }
+  //   })
+  // }
 
-  const incrementEspresso = () => {
-    setEspresso(prevCounter => {
-      prevCounter.numberOf += 1
-      return { ...prevCounter }
-    })
-  }
+  // const incrementEspresso = () => {
+  //   setEspresso(prevCounter => {
+  //     prevCounter.numberOf += 1
+  //     return { ...prevCounter }
+  //   })
+  // }
 
-  const decreaseTotalIncomeFromEspressoCost = () => {
-    setCounter(prevCounter => {
-      prevCounter.totalIncome -= Espresso.costOfASingle
-      return { ...prevCounter }
-    })
-  }
+  // const decreaseTotalIncomeFromEspressoCost = () => {
+  //   setCounter(prevCounter => {
+  //     prevCounter.totalIncome -= Espresso.costOfASingle
+  //     return { ...prevCounter }
+  //   })
+  // }
 
-  const increaseTotalSpentFromEspresso = () => {
-    setCounter(prevAmountSpent => {
-      prevAmountSpent.amountSpent += Espresso.costOfASingle
-      return { ...prevAmountSpent }
-    })
-  }
+  // const increaseTotalSpentFromEspresso = () => {
+  //   setCounter(prevAmountSpent => {
+  //     prevAmountSpent.amountSpent += Espresso.costOfASingle
+  //     return { ...prevAmountSpent }
+  //   })
+  // }
 
   useInterval(() => {
     setCounter(prevPerSecond => {
@@ -326,6 +415,7 @@ const Home = props => {
 
   return (
     <>
+      {/* {console.log(counter)} */}
       {/* 
         Small devices (landscape phones, 576px and up)
         Medium devices (tablets, 768px and up)
