@@ -15,31 +15,32 @@ const Home = props => {
 
   const [clicker, setClicker] = useState({
     costOfASingle: 40,
-    IncomePerSecond: 0.05,
+    IncomePerSecond: 0.1,
     numberOf: 0
   })
 
   const [Worker, setWorker] = useState({
     costOfASingle: 540,
-    IncomePerSecond: 0.3,
+    IncomePerSecond: 0.4,
     numberOf: 0
   })
 
   const [Keurig, setKeurig] = useState({
-    costOfASingle: 1600,
-    IncomePerSecond: 0.5,
+    costOfASingle: 7000,
+    IncomePerSecond: 0.6,
     numberOf: 0
   })
 
   const [Espresso, setEspresso] = useState({
-    costOfASingle: 5000,
-    IncomePerSecond: 0.8,
+    costOfASingle: 20000,
+    IncomePerSecond: 0.9,
     numberOf: 0
   })
 
   const ObjectArray = [clicker, Worker, Keurig, Espresso]
 
   const [Id, setId] = useState()
+  const [shop, setShop] = useState()
 
   const createCounter = () => {
     setCounter(prev => {
@@ -49,8 +50,7 @@ const Home = props => {
   }
 
   const AddPerSecondClicker = () => {
-    // if (counter.totalIncome >= clicker.costOfASingle) {
-    {
+    if (counter.totalIncome >= clicker.costOfASingle) {
       giveMeSeconds(clicker)
       multiply(setClicker)
       increment(setClicker)
@@ -60,8 +60,7 @@ const Home = props => {
   }
 
   const AddWorkerStats = () => {
-    // if (clicker.numberOf >= 1 && counter.totalIncome >= Worker.costOfASingle) {
-    {
+    if (clicker.numberOf >= 10 && counter.totalIncome >= Worker.costOfASingle) {
       giveMeSeconds(Worker)
       multiply(setWorker)
       increment(setWorker)
@@ -71,8 +70,7 @@ const Home = props => {
   }
 
   const AddKeurigStats = () => {
-    // if (Worker.numberOf >= 10 && counter.totalIncome >= Keurig.costOfASingle) {
-    {
+    if (Worker.numberOf >= 10 && counter.totalIncome >= Keurig.costOfASingle) {
       giveMeSeconds(Keurig)
       multiply(setKeurig)
       increment(setKeurig)
@@ -82,11 +80,10 @@ const Home = props => {
   }
 
   const AddEspressoStats = () => {
-    // if (
-    //   Keurig.numberOf >= 10 &&
-    //   counter.totalIncome >= Espresso.costOfASingle
-    // ) {
-    {
+    if (
+      Keurig.numberOf >= 10 &&
+      counter.totalIncome >= Espresso.costOfASingle
+    ) {
       giveMeSeconds(Espresso)
       multiply(setEspresso)
       increment(setEspresso)
@@ -152,19 +149,16 @@ const Home = props => {
     }
 
     const resp = await axios.put(
-      `https://coffee-clicker.herokuapp.com/api/Object/${Id}`,
+      `https://localhost:5001/api/Object/${Id}`,
       data
     )
   }
 
   const sendPlayerIdToSingleGameSave = async id => {
-    const resp = await axios.post(
-      'https://coffee-clicker.herokuapp.com/api/SingleGameSave',
-      {
-        PlayerId: props.match.params.id,
-        ObjectId: id
-      }
-    )
+    const resp = await axios.post('https://localhost:5001/api/SingleGameSave', {
+      PlayerId: props.match.params.id,
+      ObjectId: id
+    })
   }
 
   const saveToServer = async () => {
@@ -176,15 +170,13 @@ const Home = props => {
       EspressoMachine: JSON.stringify(Espresso)
     }
 
-    const resp = await axios.post(
-      'https://coffee-clicker.herokuapp.com/api/Object',
-      data
-    )
+    const resp = await axios.post('https://localhost:5001/api/Object', data)
 
     setId(resp.data.id)
     console.log(resp.data.id)
     console.log(resp.data)
     sendPlayerIdToSingleGameSave(resp.data.id)
+    // shopName(resp.data.id)
   }
 
   const putToServer = async () => {
@@ -198,14 +190,23 @@ const Home = props => {
         EspressoMachine: JSON.stringify(Espresso)
       }
       const resp = await axios.put(
-        `https://coffee-clicker.herokuapp.com/api/Object/${Id}`,
+        `https://localhost:5001/api/Object/${Id}`,
         data
       )
     }
   }
 
+  const shopName = async () => {
+    const resp = await axios.get(
+      `https://localhost:5001/api/PlayerStat/${props.match.params.id}`
+    )
+    console.log(resp)
+    setShop(resp.data.properName)
+  }
+
   useEffect(() => {
     saveToServer()
+    shopName()
   }, [])
 
   useEffect(() => {
@@ -219,7 +220,7 @@ const Home = props => {
       <div className="container text-center">
         <div className="top-container">
           <p>
-            <span>Username</span> Coffee Shop
+            <span>{shop}</span> Coffee Shop
           </p>
           <p>
             <span>{Math.round(counter.totalIncome * 100) / 100}</span> Coffee's

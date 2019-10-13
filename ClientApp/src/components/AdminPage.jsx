@@ -4,33 +4,63 @@ import axios from 'axios'
 
 export const AdminPage = () => {
   const [allInfo, setAllInfo] = useState()
+  const [totalUsers, setTotalUsers] = useState()
+  const [allGames, setAllGames] = useState()
+  const [gross, setGross] = useState()
 
   const grabAdminInformation = async () => {
-    const resp = await axios.get(
-      'https://coffee-clicker.herokuapp.com/api/PlayerStat'
-    )
-    console.log(resp)
+    const resp = await axios.get('https://localhost:5001/api/PlayerStat')
     setAllInfo(resp.data)
+    setTotalUsers(resp.data.length)
+  }
+
+  const getAllUserResources = async () => {
+    const resp = await axios.get('https://localhost:5001/api/Object')
+    // setAllGames(resp.data)
+
+    const x = resp.data.map(e => {
+      return JSON.parse(e.counter)
+    })
+
+    const y = x.map(e => {
+      return e.totalIncome
+    })
+
+    const w = x.map(e => {
+      return e.amountSpent
+    })
+
+    const z = y.reduce((accum, curr) => accum + curr)
+    const a = w.reduce((accum, curr) => accum + curr)
+    console.log(resp.data)
+    // console.log(resp.data.counter.totalIncome)
+    console.log(x)
+    console.log(y)
+    console.log(w)
+    console.log(z)
+    console.log(a)
+    setAllGames(z)
+    setGross(z + a)
   }
 
   useEffect(() => {
     grabAdminInformation()
+    getAllUserResources()
   }, [])
 
   return (
     <div>
-      {console.log(allInfo)}
       <div className="main-card-container">
         <main className="container-fluid">
           <div className="card-group">
-            {/* card 1 is here */}
             <div className="card bg-secondary">
               <div className="card-body">
                 <div className="row">
                   <div className="col-12">
                     <h2 className="m-b-0"></h2>
                     <h3 className="">
-                      546 <i className="fas fa-users"></i>
+                      {totalUsers}
+                      <i className="fas fa-users"></i>
                     </h3>
                     <h6 className="card-subtitle">Total Users </h6>
                   </div>
@@ -46,16 +76,18 @@ export const AdminPage = () => {
               </div>
             </div>
 
-            {/* card 2 is here */}
             <div className="card bg-secondary">
               <div className="card-body">
                 <div className="row">
                   <div className="col-12">
                     <h2 className="m-b-0"></h2>
                     <h3 className="">
-                      546 <i className="fas fa-car-alt"></i>
+                      {Math.round(allGames * 100) / 100}
+                      <i className="fas fa-car-alt"></i>
                     </h3>
-                    <h6 className="card-subtitle">All User Resources </h6>
+                    <h6 className="card-subtitle">
+                      All Users Current Inventory
+                    </h6>
                   </div>
                   <div className="col-12">
                     <div className="progress">
@@ -76,9 +108,10 @@ export const AdminPage = () => {
                   <div className="col-12">
                     <h2 className="m-b-0"></h2>
                     <h3 className="">
-                      546 <i className="fas fa-wallet"></i>
+                      {Math.round(gross * 100) / 100}
+                      <i className="fas fa-wallet"></i>
                     </h3>
-                    <h6 className="card-subtitle">$ in rewards </h6>
+                    <h6 className="card-subtitle">All Users Gross Income</h6>
                   </div>
                   <div className="col-12">
                     <div className="progress">
