@@ -5,9 +5,18 @@ import axios from 'axios'
 export const AdminPage = () => {
   const [allInfo, setAllInfo] = useState()
 
-  const grabAdminInformation = async () => {
+
+  const grabAdminInformation = async props => {
     const resp = await axios.get(
-      'https://coffee-clicker.herokuapp.com/api/PlayerStat'
+      'https://localhost:5001/api/PlayerStat'
+    )
+    console.log(resp)
+    setAllInfo(resp.data)
+  }
+
+  const deleteUser = async (id) => {
+    const resp = await axios.delete(
+      `https://localhost:5001/api/PlayerStat/${id}`
     )
     console.log(resp)
     setAllInfo(resp.data)
@@ -19,7 +28,7 @@ export const AdminPage = () => {
 
   return (
     <div>
-      {console.log(allInfo)}
+      {/* {console.log(allInfo)} */}
       <div className="main-card-container">
         <main className="container-fluid">
           <div className="card-group">
@@ -110,6 +119,8 @@ export const AdminPage = () => {
                         <p class="card-text">Id - {e.id}</p>
                         <p class="card-title">Name - {e.properName}</p>
                         <p class="card-text">Email - {e.email}</p>
+
+                        <button class="btn btn-primary mt-auto" onClick={() => deleteUser(e.id)}>Delete</button>
                       </div>
                     </div>
                   </div>
