@@ -50,14 +50,8 @@ export class MainNavBar extends Component {
 
             <ul className="navbar-nav flex-grow">
               <NavItem>
-                <NavLink tag={Link} className="text-dark" to="/">
-                  Login
-                </NavLink>
-              </NavItem>{' '}
-              <NavItem>
                 <NavLink tag={Link} className="text-dark" to="/admin">
-
-                  Admins
+                  Admin
                 </NavLink>
               </NavItem>
             </ul>
