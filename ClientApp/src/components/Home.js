@@ -170,7 +170,10 @@ const Home = props => {
       EspressoMachine: JSON.stringify(Espresso)
     }
 
-    const resp = await axios.post('https://localhost:5001/api/Object', data)
+    const resp = await axios.post(
+      'https://localhost:5001/api/Object?playerId=' + props.match.params.id,
+      data
+    )
 
     setId(resp.data.id)
     console.log(resp.data.id)
