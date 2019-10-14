@@ -16,29 +16,21 @@ export const AdminPage = () => {
 
   const getAllUserResources = async () => {
     const resp = await axios.get('https://localhost:5001/api/Object')
-    // setAllGames(resp.data)
 
-    const x = resp.data.map(e => {
+    const gettingInfo = resp.data.map(e => {
       return JSON.parse(e.counter)
     })
 
-    const y = x.map(e => {
+    const mappingTheMapForTotalIncome = gettingInfo.map(e => {
       return e.totalIncome
     })
 
-    const w = x.map(e => {
+    const totalSpent = gettingInfo.map(e => {
       return e.amountSpent
     })
 
-    const z = y.reduce((accum, curr) => accum + curr)
-    const a = w.reduce((accum, curr) => accum + curr)
-    console.log(resp.data)
-    // console.log(resp.data.counter.totalIncome)
-    console.log(x)
-    console.log(y)
-    console.log(w)
-    console.log(z)
-    console.log(a)
+    const z = mappingTheMapForTotalIncome.reduce((accum, curr) => accum + curr)
+    const a = totalSpent.reduce((accum, curr) => accum + curr)
     setAllGames(z)
     setGross(z + a)
   }
@@ -129,20 +121,20 @@ export const AdminPage = () => {
       </div>
 
       <div>
-        <div class="container-fluid">
-          <div class="row justify-content-center">
+        <div className="container-fluid">
+          <div className="row justify-content-center">
             {allInfo &&
               allInfo.map((e, i) => {
                 return (
                   <div
                     style={{ margin: 0.2 + 'rem' }}
-                    class="card-group col-xs-1"
+                    className="card-group col-xs-1"
                   >
-                    <div class="card text-left">
-                      <div class="card-body">
-                        <p class="card-text">Id - {e.id}</p>
-                        <p class="card-title">Name - {e.properName}</p>
-                        <p class="card-text">Email - {e.email}</p>
+                    <div className="card text-left">
+                      <div className="card-body">
+                        <p className="card-text">Id - {e.id}</p>
+                        <p className="card-title">Name - {e.properName}</p>
+                        <p className="card-text">Email - {e.email}</p>
                       </div>
                     </div>
                   </div>

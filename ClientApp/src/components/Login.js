@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Redirect } from 'react-router-dom'
 import * as firebase from 'firebase/app'
 import 'firebase/auth'
@@ -8,6 +8,9 @@ import Axios from 'axios'
 
 const Login = () => {
   const [id, setId] = useState()
+  const [names, setNames] = useState()
+  const [userId, setUserId] = useState()
+
   if (!firebase.apps.length) {
     firebase.initializeApp(config)
   }
@@ -27,6 +30,22 @@ const Login = () => {
       })
   }
 
+  const getAllUsers = async () => {
+    const resp = await Axios.get('https://localhost:5001/api/PlayerStat')
+    const y = resp.data.map(e => {
+      // console.log(e.properName)
+      // console.log(e.id)
+      return e.properName
+    })
+    const x = resp.data.map(e => {
+      return e.id
+    })
+    console.log(y)
+    console.log(x)
+    setNames(y)
+    setUserId(x)
+  }
+
   const putUserOnServer = async result => {
     const resp = await Axios.post('https://localhost:5001/api/PlayerStat', {
       ProperName: result.user.displayName,
@@ -34,8 +53,11 @@ const Login = () => {
     })
     setId(resp.data.id)
     console.log(resp.data.id)
-    // react router dom redirect
   }
+
+  useEffect(() => {
+    getAllUsers()
+  }, [])
 
   return (
     <div>
