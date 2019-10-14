@@ -76,10 +76,22 @@ namespace sdg_react_template.Controllers
     [HttpPost]
     public async Task<ActionResult<Objects>> PostObjects(Objects objects)
     {
-      _context.Object.Add(objects);
-      await _context.SaveChangesAsync();
+      // get the SGS for that player, 
+      // if any, check the objects table for game data
+      // if any return that 
+      // else create new object
+      // var saves = _context.SingleGameSaves.Include(i => i.Objects).Where(x => x.PlayerId == playerId);
+      // if (saves == null)
+      {
+        _context.Object.Add(objects);
+        await _context.SaveChangesAsync();
 
-      return CreatedAtAction("GetObjects", new { id = objects.Id }, objects);
+        return CreatedAtAction("GetObjects", new { id = objects.Id }, objects);
+      }
+      // else
+      // {
+      //   return ;
+      // }
     }
 
     // DELETE: api/Object/5
