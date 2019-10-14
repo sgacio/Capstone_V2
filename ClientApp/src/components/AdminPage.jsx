@@ -147,13 +147,6 @@ export const AdminPage = () => {
                     style={{ margin: 0.2 + 'rem' }}
                     className="card-group col-xs-1"
                   >
-<<<<<<< HEAD
-                    <div className="card text-left">
-                      <div className="card-body">
-                        <p className="card-text">Id - {e.id}</p>
-                        <p className="card-title">Name - {e.properName}</p>
-                        <p className="card-text">Email - {e.email}</p>
-=======
                     <div class="card text-left">
                       <div class="card-body">
                         <p class="card-text">Id - {e.id}</p>
@@ -161,7 +154,6 @@ export const AdminPage = () => {
                         <p class="card-text">Email - {e.email}</p>
 
                         <button class="btn btn-primary mt-auto" onClick={() => deleteUser(e.id)}>Delete</button>
->>>>>>> 8d4aba1f57bce966973fd628323c10c3e2dc4332
                       </div>
                     </div>
                   </div>
