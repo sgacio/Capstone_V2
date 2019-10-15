@@ -12,46 +12,46 @@ namespace sdg_react_template.Controllers
 {
   [Route("api/[controller]")]
   [ApiController]
-  public class ObjectController : ControllerBase
+  public class GameController : ControllerBase
   {
     private readonly DatabaseContext _context;
 
-    public ObjectController(DatabaseContext context)
+    public GameController(DatabaseContext context)
     {
       _context = context;
     }
 
     // GET: api/Object
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<Objects>>> GetObject()
+    public async Task<ActionResult<IEnumerable<Game>>> GetObject()
     {
-      return await _context.Object.ToListAsync();
+      return await _context.Games.ToListAsync();
     }
 
     // GET: api/Object/5
     [HttpGet("{id}")]
-    public async Task<ActionResult<Objects>> GetObjects(int id)
+    public async Task<ActionResult<Game>> GetObjects(int id)
     {
-      var objects = await _context.Object.FindAsync(id);
+      var game = await _context.Games.FindAsync(id);
 
-      if (objects == null)
+      if (game == null)
       {
         return NotFound();
       }
 
-      return objects;
+      return game;
     }
 
     // PUT: api/Object/5
     [HttpPut("{id}")]
-    public async Task<IActionResult> PutObjects(int id, Objects objects)
+    public async Task<IActionResult> PutObjects(int id, Game Games)
     {
-      if (id != objects.Id)
+      if (id != Games.Id)
       {
         return BadRequest();
       }
 
-      _context.Entry(objects).State = EntityState.Modified;
+      _context.Entry(Games).State = EntityState.Modified;
 
       try
       {
@@ -74,45 +74,46 @@ namespace sdg_react_template.Controllers
 
     // POST: api/Object
     [HttpPost]
-    public async Task<ActionResult<Objects>> PostObjects(Objects objects)
+    public async Task<ActionResult<Game>> PostObjects(Game games)
     {
       // get the SGS for that player, 
       // if any, check the objects table for game data
-      // if any return that 
+      // if any return that THIS IS WHERE I AM STUCK LIKE A DUCK 
       // else create new object
-      // var saves = _context.SingleGameSaves.Include(i => i.Objects).Where(x => x.PlayerId == playerId);
-      // if (saves == null)
-      {
-        _context.Object.Add(objects);
-        await _context.SaveChangesAsync();
+      // var saves = _context.Object.FirstOrDefault(x => x.Id == objectId);
 
-        return CreatedAtAction("GetObjects", new { id = objects.Id }, objects);
-      }
+      // if (saves == null)
+      // {
+      _context.Games.Add(games);
+      await _context.SaveChangesAsync();
+
+      return CreatedAtAction("GetObjects", new { id = games.Id }, games);
+      // }
       // else
       // {
-      //   return ;
+      //   return saves;
       // }
     }
 
     // DELETE: api/Object/5
     [HttpDelete("{id}")]
-    public async Task<ActionResult<Objects>> DeleteObjects(int id)
+    public async Task<ActionResult<Game>> DeleteObjects(int id)
     {
-      var objects = await _context.Object.FindAsync(id);
-      if (objects == null)
+      var game = await _context.Games.FindAsync(id);
+      if (game == null)
       {
         return NotFound();
       }
 
-      _context.Object.Remove(objects);
+      _context.Games.Remove(game);
       await _context.SaveChangesAsync();
 
-      return objects;
+      return game;
     }
 
     private bool ObjectsExists(int id)
     {
-      return _context.Object.Any(e => e.Id == id);
+      return _context.Games.Any(e => e.Id == id);
     }
   }
 }

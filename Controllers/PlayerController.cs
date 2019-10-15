@@ -12,46 +12,46 @@ namespace sdg_react_template.Controllers
 {
   [Route("api/[controller]")]
   [ApiController]
-  public class PlayerStatController : ControllerBase
+  public class PlayerController : ControllerBase
   {
     private readonly DatabaseContext _context;
 
-    public PlayerStatController(DatabaseContext context)
+    public PlayerController(DatabaseContext context)
     {
       _context = context;
     }
 
     // GET: api/PlayerStat
     [HttpGet]
-    public async Task<ActionResult<IEnumerable<PlayerStat>>> GetPlayerStats()
+    public async Task<ActionResult<IEnumerable<Player>>> GetPlayerStats()
     {
-      return await _context.PlayerStats.ToListAsync();
+      return await _context.Players.ToListAsync();
     }
 
     // GET: api/PlayerStat/5
     [HttpGet("{id}")]
-    public async Task<ActionResult<PlayerStat>> GetPlayerStat(int id)
+    public async Task<ActionResult<Player>> GetPlayerStat(int id)
     {
-      var playerStat = await _context.PlayerStats.FindAsync(id);
+      var player = await _context.Players.FindAsync(id);
 
-      if (playerStat == null)
+      if (player == null)
       {
         return NotFound();
       }
 
-      return playerStat;
+      return player;
     }
 
     // PUT: api/PlayerStat/5
     [HttpPut("{id}")]
-    public async Task<IActionResult> PutPlayerStat(int id, PlayerStat playerStat)
+    public async Task<IActionResult> PutPlayerStat(int id, Player player)
     {
-      if (id != playerStat.Id)
+      if (id != player.Id)
       {
         return BadRequest();
       }
 
-      _context.Entry(playerStat).State = EntityState.Modified;
+      _context.Entry(player).State = EntityState.Modified;
 
       try
       {
@@ -74,15 +74,15 @@ namespace sdg_react_template.Controllers
 
     // POST: api/PlayerStat
     [HttpPost]
-    public async Task<ActionResult<PlayerStat>> PostPlayerStat(PlayerStat playerStat)
+    public async Task<ActionResult<Player>> PostPlayerStat(Player player)
     {
-      var user = _context.PlayerStats.FirstOrDefault(p => p.ProperName == playerStat.ProperName);
+      var user = _context.Players.FirstOrDefault(p => p.ProperName == player.ProperName);
       if (user == null)
       {
-        _context.PlayerStats.Add(playerStat);
+        _context.Players.Add(player);
         await _context.SaveChangesAsync();
 
-        return CreatedAtAction("GetPlayerStat", new { id = playerStat.Id }, playerStat);
+        return CreatedAtAction("GetPlayerStat", new { id = player.Id }, player);
       }
       else
       {
@@ -92,15 +92,15 @@ namespace sdg_react_template.Controllers
 
     // DELETE: api/PlayerStat/5
     [HttpDelete("{id}")]
-    public async Task<ActionResult<PlayerStat>> DeletePlayerStat(int id)
+    public async Task<ActionResult<Player>> DeletePlayerStat(int id)
     {
-      var playerStat = await _context.PlayerStats.FindAsync(id);
+      var playerStat = await _context.Players.FindAsync(id);
       if (playerStat == null)
       {
         return NotFound();
       }
 
-      _context.PlayerStats.Remove(playerStat);
+      _context.Players.Remove(playerStat);
       await _context.SaveChangesAsync();
 
       return playerStat;
@@ -108,7 +108,7 @@ namespace sdg_react_template.Controllers
 
     private bool PlayerStatExists(int id)
     {
-      return _context.PlayerStats.Any(e => e.Id == id);
+      return _context.Players.Any(e => e.Id == id);
     }
   }
 }

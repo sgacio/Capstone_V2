@@ -31,7 +31,7 @@ const Login = () => {
   }
 
   const getAllUsers = async () => {
-    const resp = await Axios.get('https://localhost:5001/api/PlayerStat')
+    const resp = await Axios.get('/api/Player')
     const y = resp.data.map(e => {
       // console.log(e.properName)
       // console.log(e.id)
@@ -47,7 +47,7 @@ const Login = () => {
   }
 
   const putUserOnServer = async result => {
-    const resp = await Axios.post('https://localhost:5001/api/PlayerStat', {
+    const resp = await Axios.post('/api/Player', {
       ProperName: result.user.displayName,
       Email: result.user.email
     })

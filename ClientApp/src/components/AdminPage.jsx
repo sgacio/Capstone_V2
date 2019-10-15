@@ -13,22 +13,20 @@ export const AdminPage = () => {
   // }
 
   const grabAdminInformation = async () => {
-    const resp = await axios.get('https://localhost:5001/api/PlayerStat')
+    const resp = await axios.get('/api/Player')
     console.log(resp)
     setAllInfo(resp.data)
     setTotalUsers(resp.data.length)
   }
 
   const deleteUser = async id => {
-    const resp = await axios.delete(
-      `https://localhost:5001/api/PlayerStat/${id}`
-    )
+    const resp = await axios.delete(`/api/Player/${id}`)
     console.log(resp)
     // setAllInfo(resp.data)
   }
 
   const getAllUserResources = async () => {
-    const resp = await axios.get('https://localhost:5001/api/Object')
+    const resp = await axios.get('/api/Game')
 
     const gettingInfo = resp.data.map(e => {
       return JSON.parse(e.counter)

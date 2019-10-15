@@ -148,14 +148,11 @@ const Home = props => {
       EspressoMachine: JSON.stringify(Espresso)
     }
 
-    const resp = await axios.put(
-      `https://localhost:5001/api/Object/${Id}`,
-      data
-    )
+    const resp = await axios.put(`/api/Game/${Id}`, data)
   }
 
   const sendPlayerIdToSingleGameSave = async id => {
-    const resp = await axios.post('https://localhost:5001/api/SingleGameSave', {
+    const resp = await axios.post('/api/Player_Game', {
       PlayerId: props.match.params.id,
       ObjectId: id
     })
@@ -170,10 +167,7 @@ const Home = props => {
       EspressoMachine: JSON.stringify(Espresso)
     }
 
-    const resp = await axios.post(
-      'https://localhost:5001/api/Object?playerId=' + props.match.params.id,
-      data
-    )
+    const resp = await axios.post('/api/Game', data)
 
     setId(resp.data.id)
     console.log(resp.data.id)
@@ -192,17 +186,12 @@ const Home = props => {
         Keurig: JSON.stringify(Keurig),
         EspressoMachine: JSON.stringify(Espresso)
       }
-      const resp = await axios.put(
-        `https://localhost:5001/api/Object/${Id}`,
-        data
-      )
+      const resp = await axios.put(`/api/Game/${Id}`, data)
     }
   }
 
   const shopName = async () => {
-    const resp = await axios.get(
-      `https://localhost:5001/api/PlayerStat/${props.match.params.id}`
-    )
+    const resp = await axios.get(`/api/Player/${props.match.params.id}`)
     console.log(resp)
     setShop(resp.data.properName)
   }
@@ -260,7 +249,7 @@ const Home = props => {
               <tr>
                 <th>Number Of</th>
                 {ObjectArray.map((e, i) => {
-                  return <Table p={e.numberOf} />
+                  return <Table key={i} p={e.numberOf} />
                 })}
               </tr>
             </tbody>
@@ -268,7 +257,12 @@ const Home = props => {
               <tr>
                 <th>Cost</th>
                 {ObjectArray.map((e, i) => {
-                  return <Table p={Math.round(e.costOfASingle * 100) / 100} />
+                  return (
+                    <Table
+                      key={i}
+                      p={Math.round(e.costOfASingle * 100) / 100}
+                    />
+                  )
                 })}
               </tr>
               <tr>

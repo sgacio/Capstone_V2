@@ -46,8 +46,8 @@ namespace capstone_v2
       modelBuilder.HasAnnotation("ProductVersion", "2.2.0-rtm-35687");
     }
 
-    public DbSet<PlayerStat> PlayerStats { get; set; }
-    public DbSet<SingleGameSave> SingleGameSaves { get; set; }
-    public DbSet<Objects> Object { get; set; }
+    public DbSet<Player> Players { get; set; }
+    public DbSet<Player_Game> Player_Games { get; set; }
+    public DbSet<Game> Games { get; set; }
   }
 }
