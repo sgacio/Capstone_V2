@@ -60,7 +60,7 @@ const Login = () => {
   }, [])
 
   return (
-    <div>
+    <div className="text-center">
       {id ? (
         <Redirect to={`/Game/${id}`}></Redirect>
       ) : (

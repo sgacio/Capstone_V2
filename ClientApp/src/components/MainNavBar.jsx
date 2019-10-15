@@ -37,24 +37,17 @@ export class MainNavBar extends Component {
 
   render() {
     return (
-      <main>
+      <main className="nav-bar-main">
         <header>
           <Navbar
-            className="navbar-expand-sm ng-white border-bottom box-shadow mb-3"
+            className="navbar-expand-sm ng-white border-bottom box-shadow mb-3 justify-content-center"
             light
           >
-            <NavbarBrand tag={Link} to="/Game/id">
-              CoffeeClicker
+            <i class="fas fa-mug-hot"></i>
+            <NavbarBrand className="coffee-clicker font-weight-bolder font-italic">
+              Coffee Clicker
             </NavbarBrand>
-            <NavbarToggler onClick={this.toggleNavbar} className="mr-2" />
-
-            <ul className="navbar-nav flex-grow">
-              <NavItem>
-                <NavLink tag={Link} className="text-dark" to="/admin">
-                  Admin
-                </NavLink>
-              </NavItem>
-            </ul>
+            <i class="fas fa-mug-hot"></i>
           </Navbar>
         </header>
         <Router>

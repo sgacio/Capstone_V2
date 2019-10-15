@@ -210,37 +210,38 @@ const Home = props => {
       {console.log(counter)}
 
       <div className="container text-center">
-        <div className="top-container">
-          <p>
-            <span>{shop}</span> Coffee Shop
-          </p>
-          <p>
-            <span>{Math.round(counter.totalIncome * 100) / 100}</span> Coffee's
-            collected
-          </p>
-          <p>
-            <span>{Math.ceil(counter.IncomePerSecond * 100) / 100}</span> Cups
-            Per Second(CPS)
-          </p>
+        <div className="parent">
+          <div className="top-container card text-white bg-dark">
+            <p>
+              <span>{shop}</span> Coffee Shop
+            </p>
+            <p>
+              <span>{Math.round(counter.totalIncome * 100) / 100}</span>{' '}
+              Coffee's collected
+            </p>
+            <p>
+              <span>{Math.ceil(counter.IncomePerSecond * 100) / 100}</span> Cups
+              Per Second(CPS)
+            </p>
+          </div>
+          <div className="button-container">
+            <button className="btn btn-dark" onClick={() => createCounter()}>
+              <img
+                src={Latest}
+                className="coffee-image img-fluid"
+                alt="White starbucks coffee cup"
+              ></img>
+            </button>
+          </div>
         </div>
-        <button
-          className="btn btn-outline-dark"
-          onClick={() => createCounter()}
-        >
-          <img
-            src={Latest}
-            className="coffee-image img-fluid"
-            alt="White starbucks coffee cup"
-          ></img>
-        </button>
-
-
 
         <div className="card-deck">
           <div className="card text-white bg-dark">
             <div className="card-body">
-              <h3>Clicker</h3>
-              <p>Number Owned <span>{clicker.numberOf}</span></p>
+              <h5>Clicker</h5>
+              <p>
+                Number Owned <span>{clicker.numberOf}</span>
+              </p>
               <p>Price {clicker.costOfASingle}</p>
               <button
                 className="btn btn-secondary"
@@ -249,56 +250,18 @@ const Home = props => {
                 }}
               >
                 Clicking
-        <div className="container-fluid margin">
-          <table className="table table-dark">
-            <thead>
-              <tr>
-                <th></th>
-                <th scope="col">Clicker</th>
-                <th scope="col">Worker</th>
-                <th scope="col">Keurig</th>
-                <th scope="col">Espresso Machine</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th>Number Of</th>
-                {ObjectArray.map((e, i) => {
-                  return <Table key={i} p={e.numberOf} />
-                })}
-              </tr>
-            </tbody>
-            <tbody>
-              <tr>
-                <th>Cost</th>
-                {ObjectArray.map((e, i) => {
-                  return (
-                    <Table
-                      key={i}
-                      p={Math.round(e.costOfASingle * 100) / 100}
-                    />
-                  )
-                })}
-              </tr>
-              <tr>
-                <th>Purchase Button</th>
-                <td>
-                  <button
-                    className="btn btn-outline-light"
-                    onClick={() => {
-                      AddPerSecondClicker()
-                    }}
-                  >
-                    Clicking
-                  </button>
-
+              </button>
             </div>
           </div>
           <div className="card text-white bg-dark">
             <div className="card-body">
-              <h3>Employee</h3>
-              <p>Number Owned <span>{Worker.numberOf}</span></p>
-              <p>Price <span>{Worker.costOfASingle}</span></p>
+              <h5>Employee</h5>
+              <p>
+                Number Owned <span>{Worker.numberOf}</span>
+              </p>
+              <p>
+                Price <span>{Worker.costOfASingle}</span>
+              </p>
               <button
                 className="btn btn-secondary "
                 onClick={() => {
@@ -306,15 +269,18 @@ const Home = props => {
                 }}
               >
                 Worker
-                  </button>
-
+              </button>
             </div>
           </div>
           <div className="card text-white bg-dark">
             <div className="card-body">
-              <h3>Keurig</h3>
-              <p>Number Owned <span>{Keurig.numberOf}</span></p>
-              <p>Price <span>{Keurig.costOfASingle}</span></p>
+              <h5>Keurig</h5>
+              <p>
+                Number Owned <span>{Keurig.numberOf}</span>
+              </p>
+              <p>
+                Price <span>{Keurig.costOfASingle}</span>
+              </p>
               <button
                 className="btn btn-secondary"
                 onClick={() => {
@@ -322,15 +288,18 @@ const Home = props => {
                 }}
               >
                 Keurig
-                  </button>
-
+              </button>
             </div>
           </div>
           <div className="card text-white bg-dark">
             <div className="card-body">
-              <h3>Espresso Machine</h3>
-              <p>Number Owned <span></span></p>
-              <p>Price <span>1</span></p>
+              <h5>Espresso Machine</h5>
+              <p>
+                Number Owned <span></span>
+              </p>
+              <p>
+                Price <span>1</span>
+              </p>
               <button
                 className="btn btn-secondary"
                 onClick={() => {
@@ -338,13 +307,10 @@ const Home = props => {
                 }}
               >
                 Espresso
-                  </button>
-
+              </button>
             </div>
           </div>
         </div>
-
-
       </div>
     </div>
   )
