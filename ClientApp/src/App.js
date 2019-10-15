@@ -2,9 +2,7 @@ import React, { Component } from 'react'
 import { Route } from 'react-router-dom'
 import { Layout } from './components/Layout'
 import Home from './components/Home'
-
 import AdminPage from './components/AdminPage'
-
 import Login from './components/Login'
 
 export default class App extends Component {
