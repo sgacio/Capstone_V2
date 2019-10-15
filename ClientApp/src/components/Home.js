@@ -148,14 +148,11 @@ const Home = props => {
       EspressoMachine: JSON.stringify(Espresso)
     }
 
-    const resp = await axios.put(
-      `https://localhost:5001/api/Object/${Id}`,
-      data
-    )
+    const resp = await axios.put(`/api/Game/${Id}`, data)
   }
 
   const sendPlayerIdToSingleGameSave = async id => {
-    const resp = await axios.post('https://localhost:5001/api/SingleGameSave', {
+    const resp = await axios.post('/api/Player_Game', {
       PlayerId: props.match.params.id,
       ObjectId: id
     })
@@ -170,7 +167,7 @@ const Home = props => {
       EspressoMachine: JSON.stringify(Espresso)
     }
 
-    const resp = await axios.post('https://localhost:5001/api/Object', data)
+    const resp = await axios.post('/api/Game', data)
 
     setId(resp.data.id)
     console.log(resp.data.id)
@@ -189,17 +186,12 @@ const Home = props => {
         Keurig: JSON.stringify(Keurig),
         EspressoMachine: JSON.stringify(Espresso)
       }
-      const resp = await axios.put(
-        `https://localhost:5001/api/Object/${Id}`,
-        data
-      )
+      const resp = await axios.put(`/api/Game/${Id}`, data)
     }
   }
 
   const shopName = async () => {
-    const resp = await axios.get(
-      `https://localhost:5001/api/PlayerStat/${props.match.params.id}`
-    )
+    const resp = await axios.get(`/api/Player/${props.match.params.id}`)
     console.log(resp)
     setShop(resp.data.properName)
   }
@@ -243,6 +235,7 @@ const Home = props => {
         </button>
 
 
+
         <div className="card-deck">
           <div className="card text-white bg-dark">
             <div className="card-body">
@@ -256,6 +249,47 @@ const Home = props => {
                 }}
               >
                 Clicking
+        <div className="container-fluid margin">
+          <table className="table table-dark">
+            <thead>
+              <tr>
+                <th></th>
+                <th scope="col">Clicker</th>
+                <th scope="col">Worker</th>
+                <th scope="col">Keurig</th>
+                <th scope="col">Espresso Machine</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th>Number Of</th>
+                {ObjectArray.map((e, i) => {
+                  return <Table key={i} p={e.numberOf} />
+                })}
+              </tr>
+            </tbody>
+            <tbody>
+              <tr>
+                <th>Cost</th>
+                {ObjectArray.map((e, i) => {
+                  return (
+                    <Table
+                      key={i}
+                      p={Math.round(e.costOfASingle * 100) / 100}
+                    />
+                  )
+                })}
+              </tr>
+              <tr>
+                <th>Purchase Button</th>
+                <td>
+                  <button
+                    className="btn btn-outline-light"
+                    onClick={() => {
+                      AddPerSecondClicker()
+                    }}
+                  >
+                    Clicking
                   </button>
 
             </div>

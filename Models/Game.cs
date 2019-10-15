@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace Capstone_V2.Models
 {
-  public class Objects
+  public class Game
   {
     public int Id { get; set; }
 
@@ -25,6 +25,6 @@ namespace Capstone_V2.Models
 
     [Column(TypeName = "json")]
     public string EspressoMachine { get; set; }
-    public List<SingleGameSave> SingleGameSaves { get; set; }
+    public List<Player_Game> Player_Games { get; set; }
   }
 }
