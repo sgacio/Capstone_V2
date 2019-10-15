@@ -9,26 +9,20 @@ export const AdminPage = () => {
   const [gross, setGross] = useState()
 
 
-  const grabAdminInformation = async props => {
-    const resp = await axios.get(
-      'https://localhost:5001/api/PlayerStat'
-    )
+  const grabAdminInformation = async () => {
+    const resp = await axios.get('/api/Player')
     console.log(resp)
     setAllInfo(resp.data)
     setTotalUsers(resp.data.length)
-
   }
 
-  const deleteUser = async (id) => {
-    const resp = await axios.delete(
-      `https://localhost:5001/api/PlayerStat/${id}`
-    )
+  const deleteUser = async id => {
+    const resp = await axios.delete(`/api/Player/${id}`)
     console.log(resp)
-
   }
 
   const getAllUserResources = async () => {
-    const resp = await axios.get('https://localhost:5001/api/Object')
+    const resp = await axios.get('/api/Game')
 
     const gettingInfo = resp.data.map(e => {
       return JSON.parse(e.counter)
@@ -45,6 +39,8 @@ export const AdminPage = () => {
     const z = mappingTheMapForTotalIncome.reduce((accum, curr) => accum + curr)
     const a = totalSpent.reduce((accum, curr) => accum + curr)
     setAllGames(z)
+    console.log(z)
+    console.log(a)
     setGross(z + a)
   }
 
@@ -140,9 +136,11 @@ export const AdminPage = () => {
               allInfo.map((e, i) => {
                 return (
                   <div
+                    key={i}
                     style={{ margin: 0.2 + 'rem' }}
                     className="card-group col-xs-1"
                   >
+
                     <div class="card text-left">
                       <div class="card-body">
                         <p class="card-text">Id - {e.id}</p>
@@ -150,6 +148,18 @@ export const AdminPage = () => {
                         <p class="card-text">Email - {e.email}</p>
 
                         <button class="btn btn-primary mt-auto" onClick={() => deleteUser(e.id)}>Delete</button>
+                    <div className="card text-left">
+                      <div className="card-body">
+                        <p className="card-text">Id - {e.id}</p>
+                        <p className="card-title">Name - {e.properName}</p>
+                        <p className="card-text">Email - {e.email}</p>
+
+                        <button
+                          className="btn btn-primary mt-auto"
+                          onClick={() => deleteUser(e.id)}
+                        >
+                          Delete
+                        </button>
                       </div>
                     </div>
                   </div>
