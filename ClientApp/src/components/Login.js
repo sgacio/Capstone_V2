@@ -5,6 +5,7 @@ import * as firebase from 'firebase/app'
 import 'firebase/auth'
 import config from './FirebaseAuth'
 import Axios from 'axios'
+import './styles.css'
 
 const Login = () => {
   const [id, setId] = useState()
@@ -60,15 +61,31 @@ const Login = () => {
   }, [])
 
   return (
-    <div className="text-center">
-      {id ? (
-        <Redirect to={`/Game/${id}`}></Redirect>
-      ) : (
-        <button onClick={() => signInWithPopup()} type="">
-          Sign in
-        </button>
-      )}
-    </div>
+    <section class="banner-area" id="home">
+      <div class="container">
+        <div class="row fullscreen d-flex align-items-center justify-content-start">
+          <div class="banner-content col-lg-7">
+            <h6 class="text-white text-uppercase">
+              Now you can feel the Energy
+            </h6>
+            <h1>Start your journey now, build your legacy.</h1>
+          </div>
+        </div>
+        <div className="text-center">
+          {id ? (
+            <Redirect to={`/Game/${id}`}></Redirect>
+          ) : (
+            <button
+              className="btn btn-secondary"
+              onClick={() => signInWithPopup()}
+              type=""
+            >
+              Sign in
+            </button>
+          )}
+        </div>
+      </div>
+    </section>
   )
 }
 

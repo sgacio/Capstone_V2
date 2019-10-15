@@ -1,0 +1,19 @@
+.banner-area {
+  background-image: url(./images/header-bg.jpg);
+  /* opacity:; */
+  background-size: cover;
+}
+
+.banner-content{
+  margin: 12.2rem;
+  color: white;
+}
+
+.container{
+  width: 100%;
+  padding-right: 0.94rem;
+  padding-left: 0.94rem;
+  margin-right: auto;
+  margin-left: auto;
+}
+
