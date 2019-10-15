@@ -206,7 +206,7 @@ const Home = props => {
   }, [clicker, Worker, Keurig, Espresso])
 
   return (
-    <>
+    <div>
       {console.log(counter)}
 
       <div className="container text-center">
@@ -234,6 +234,21 @@ const Home = props => {
           ></img>
         </button>
 
+
+
+        <div className="card-deck">
+          <div className="card text-white bg-dark">
+            <div className="card-body">
+              <h3>Clicker</h3>
+              <p>Number Owned <span>{clicker.numberOf}</span></p>
+              <p>Price {clicker.costOfASingle}</p>
+              <button
+                className="btn btn-secondary"
+                onClick={() => {
+                  AddPerSecondClicker()
+                }}
+              >
+                Clicking
         <div className="container-fluid margin">
           <table className="table table-dark">
             <thead>
@@ -276,43 +291,62 @@ const Home = props => {
                   >
                     Clicking
                   </button>
-                </td>
-                <td>
-                  <button
-                    className="btn btn-outline-light"
-                    onClick={() => {
-                      AddWorkerStats()
-                    }}
-                  >
-                    Worker
+
+            </div>
+          </div>
+          <div className="card text-white bg-dark">
+            <div className="card-body">
+              <h3>Employee</h3>
+              <p>Number Owned <span>{Worker.numberOf}</span></p>
+              <p>Price <span>{Worker.costOfASingle}</span></p>
+              <button
+                className="btn btn-secondary "
+                onClick={() => {
+                  AddWorkerStats()
+                }}
+              >
+                Worker
                   </button>
-                </td>
-                <td>
-                  <button
-                    className="btn btn-outline-light"
-                    onClick={() => {
-                      AddKeurigStats()
-                    }}
-                  >
-                    Keurig
+
+            </div>
+          </div>
+          <div className="card text-white bg-dark">
+            <div className="card-body">
+              <h3>Keurig</h3>
+              <p>Number Owned <span>{Keurig.numberOf}</span></p>
+              <p>Price <span>{Keurig.costOfASingle}</span></p>
+              <button
+                className="btn btn-secondary"
+                onClick={() => {
+                  AddKeurigStats()
+                }}
+              >
+                Keurig
                   </button>
-                </td>
-                <td>
-                  <button
-                    className="btn btn-outline-light"
-                    onClick={() => {
-                      AddEspressoStats()
-                    }}
-                  >
-                    Espresso
+
+            </div>
+          </div>
+          <div className="card text-white bg-dark">
+            <div className="card-body">
+              <h3>Espresso Machine</h3>
+              <p>Number Owned <span></span></p>
+              <p>Price <span>1</span></p>
+              <button
+                className="btn btn-secondary"
+                onClick={() => {
+                  AddEspressoStats()
+                }}
+              >
+                Espresso
                   </button>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+
+            </div>
+          </div>
         </div>
+
+
       </div>
-    </>
+    </div>
   )
 }
 

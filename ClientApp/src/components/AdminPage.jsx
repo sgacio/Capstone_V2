@@ -8,9 +8,6 @@ export const AdminPage = () => {
   const [allGames, setAllGames] = useState()
   const [gross, setGross] = useState()
 
-  // const grabAdminInformation = async () => {
-  //   const resp = await axios.get('https://localhost:5001/api/PlayerStat')
-  // }
 
   const grabAdminInformation = async () => {
     const resp = await axios.get('/api/Player')
@@ -22,7 +19,6 @@ export const AdminPage = () => {
   const deleteUser = async id => {
     const resp = await axios.delete(`/api/Player/${id}`)
     console.log(resp)
-    // setAllInfo(resp.data)
   }
 
   const getAllUserResources = async () => {
@@ -144,6 +140,14 @@ export const AdminPage = () => {
                     style={{ margin: 0.2 + 'rem' }}
                     className="card-group col-xs-1"
                   >
+
+                    <div class="card text-left">
+                      <div class="card-body">
+                        <p class="card-text">Id - {e.id}</p>
+                        <p class="card-title">Name - {e.properName}</p>
+                        <p class="card-text">Email - {e.email}</p>
+
+                        <button class="btn btn-primary mt-auto" onClick={() => deleteUser(e.id)}>Delete</button>
                     <div className="card text-left">
                       <div className="card-body">
                         <p className="card-text">Id - {e.id}</p>
