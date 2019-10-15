@@ -1,4 +1,3 @@
-
 var config = {
   apiKey: "AIzaSyA68nbQIEnd0fIPFhcJ2z1d1pafNqL01p4",
   authDomain: "capstone-2045d.firebaseapp.com",
