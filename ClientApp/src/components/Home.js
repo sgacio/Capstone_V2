@@ -12,6 +12,10 @@ const Home = props => {
     amountSpent: 0,
     IncomePerSecond: 0
   })
+  // const [locCounter, setLocCounter] = useLocalStorage(
+  //   'locCounter',
+  //   JSON.stringify({ c: 1, x: 'hello' })
+  // )
 
   const [clicker, setClicker] = useState({
     costOfASingle: 40,
@@ -40,6 +44,7 @@ const Home = props => {
   const ObjectArray = [clicker, Worker, Keurig, Espresso]
 
   const [Id, setId] = useState()
+  const [locId, setLocId] = useState()
   const [shop, setShop] = useState()
 
   const createCounter = () => {
@@ -136,6 +141,10 @@ const Home = props => {
 
   useInterval(() => {
     counterToServer()
+    // localStorage.setItem(
+    //   'Player Game State',
+    //   JSON.stringify({ counter, clicker, Worker, Keurig, Espresso })
+    // )
   }, 30000)
 
   const counterToServer = async () => {
@@ -170,10 +179,11 @@ const Home = props => {
     const resp = await axios.post('/api/Game', data)
 
     setId(resp.data.id)
-    console.log(resp.data.id)
+    console.log(resp.data.id, 'game id')
     console.log(resp.data)
     sendPlayerIdToSingleGameSave(resp.data.id)
     // shopName(resp.data.id)
+    localStorage.setItem('Player Game State', resp.data.id)
   }
 
   const putToServer = async () => {
@@ -187,6 +197,19 @@ const Home = props => {
         EspressoMachine: JSON.stringify(Espresso)
       }
       const resp = await axios.put(`/api/Game/${Id}`, data)
+    } else if (localStorage.getItem('Player Game State')) {
+      const data = {
+        Id: localStorage.getItem('Player Game State'),
+        counter: JSON.stringify(counter),
+        clicker: JSON.stringify(clicker),
+        worker: JSON.stringify(Worker),
+        Keurig: JSON.stringify(Keurig),
+        EspressoMachine: JSON.stringify(Espresso)
+      }
+      const resp = await axios.put(
+        `/api/Game/${localStorage.getItem('Player Game State')}`,
+        data
+      )
     }
   }
 
@@ -196,8 +219,21 @@ const Home = props => {
     setShop(resp.data.properName)
   }
 
+  const getLocalStorage = async locId => {
+    const resp = await axios.get(`api/Game/${locId}`)
+    console.log(resp.data, 'game coming back')
+    setId(locId)
+    // setCounter(resp.)
+  }
+
   useEffect(() => {
-    saveToServer()
+    const prevGameId = localStorage.getItem('Player Game State')
+    console.log(prevGameId)
+    if (prevGameId) {
+      getLocalStorage(prevGameId)
+    } else {
+      saveToServer()
+    }
     shopName()
   }, [])
 
@@ -208,16 +244,15 @@ const Home = props => {
   return (
     <div>
       {console.log(counter)}
-
       <div className="container text-center">
         <div className="parent">
           <div className="top-container card text-white bg-dark">
             <p>
-              <h7>{shop}'s</h7> Coffee Shop
+              <span>{shop}'s</span> Coffee Shop
             </p>
             <p>
-              <span>{Math.round(counter.totalIncome * 100) / 100}</span>{' '}
-              Coffee's collected
+              <span>{Math.round(counter.totalIncome * 100) / 100}</span> Coffees
+              collected
             </p>
             <p>
               <span>{Math.ceil(counter.IncomePerSecond * 100) / 100}</span> Cups
