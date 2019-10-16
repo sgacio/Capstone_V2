@@ -145,7 +145,7 @@ const Home = props => {
     //   'Player Game State',
     //   JSON.stringify({ counter, clicker, Worker, Keurig, Espresso })
     // )
-  }, 30000)
+  }, 1000)
 
   const counterToServer = async () => {
     const data = {
@@ -223,7 +223,11 @@ const Home = props => {
     const resp = await axios.get(`api/Game/${locId}`)
     console.log(resp.data, 'game coming back')
     setId(locId)
-    // setCounter(resp.)
+    setCounter(JSON.parse(resp.data.counter))
+    setClicker(JSON.parse(resp.data.clicker))
+    setWorker(JSON.parse(resp.data.worker))
+    setKeurig(JSON.parse(resp.data.keurig))
+    setEspresso(JSON.parse(resp.data.espressoMachine))
   }
 
   useEffect(() => {

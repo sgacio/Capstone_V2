@@ -44,7 +44,7 @@ export class MainNavBar extends Component {
             light
           >
             <i class="fan fas fa-mug-hot"></i>
-            <NavbarBrand className="coffee-clicker font-weight-bolder font-italic">
+            <NavbarBrand className="coffee-clicker font-weight-medium font-italic">
               Coffee Clicker
             </NavbarBrand>
             <i class="fan fas fa-mug-hot"></i>
