@@ -213,7 +213,7 @@ const Home = props => {
         <div className="parent">
           <div className="top-container card text-white bg-dark">
             <p>
-              <h5>{shop}'s</h5> Coffee Shop
+              <h7>{shop}'s</h7> Coffee Shop
             </p>
             <p>
               <span>{Math.round(counter.totalIncome * 100) / 100}</span>{' '}
@@ -242,7 +242,10 @@ const Home = props => {
               <p>
                 Number Owned <span>{clicker.numberOf}</span>
               </p>
-              <p>Price {clicker.costOfASingle}</p>
+              <p>
+                Price{' '}
+                <span>{Math.round(clicker.costOfASingle * 100) / 100}</span>
+              </p>
               <i
                 class="fas fa-info-circle m-1"
                 title="Clickers help you produce coffee per second, buy 10 clickers in order to purchase a worker."
@@ -264,7 +267,8 @@ const Home = props => {
                 Number Owned <span>{Worker.numberOf}</span>
               </p>
               <p>
-                Price <span>{Worker.costOfASingle}</span>
+                Price{' '}
+                <span>{Math.round(Worker.costOfASingle * 100) / 100}</span>
               </p>
               <i
                 class="fas fa-info-circle m-1"
@@ -287,7 +291,8 @@ const Home = props => {
                 Number Owned <span>{Keurig.numberOf}</span>
               </p>
               <p>
-                Price <span>{Keurig.costOfASingle}</span>
+                Price{' '}
+                <span>{Math.round(Keurig.costOfASingle * 100) / 100}</span>
               </p>
               <i
                 class="fas fa-info-circle m-1"
@@ -307,10 +312,11 @@ const Home = props => {
             <div className="card-body">
               <h5>Espresso Machine</h5>
               <p>
-                Number Owned <span></span>
+                Number Owned <span>{Espresso.numberOf}</span>
               </p>
               <p>
-                Price <span>{Espresso.costOfASingle}</span>
+                Price{' '}
+                <span>{Math.round(Espresso.costOfASingle * 100) / 100}</span>
               </p>
               <i
                 class="fas fa-info-circle m-1"
