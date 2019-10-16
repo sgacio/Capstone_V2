@@ -213,7 +213,7 @@ const Home = props => {
         <div className="parent">
           <div className="top-container card text-white bg-dark">
             <p>
-              <span>{shop}</span> Coffee Shop
+              <h5>{shop}'s</h5> Coffee Shop
             </p>
             <p>
               <span>{Math.round(counter.totalIncome * 100) / 100}</span>{' '}
@@ -243,6 +243,10 @@ const Home = props => {
                 Number Owned <span>{clicker.numberOf}</span>
               </p>
               <p>Price {clicker.costOfASingle}</p>
+              <i
+                class="fas fa-info-circle m-1"
+                title="Clickers help you produce coffee per second, buy 10 clickers in order to purchase a worker."
+              ></i>
               <button
                 className="btn btn-secondary"
                 onClick={() => {
@@ -262,6 +266,10 @@ const Home = props => {
               <p>
                 Price <span>{Worker.costOfASingle}</span>
               </p>
+              <i
+                class="fas fa-info-circle m-1"
+                title="Every business needs hard working employees, buy 10 employees to unlock purchasing Keurigs."
+              ></i>
               <button
                 className="btn btn-secondary "
                 onClick={() => {
@@ -281,6 +289,10 @@ const Home = props => {
               <p>
                 Price <span>{Keurig.costOfASingle}</span>
               </p>
+              <i
+                class="fas fa-info-circle m-1"
+                title="Keurigs are efficient and make a consistent cup of coffee, buy 10 in order to start buying Espresso Machines ."
+              ></i>
               <button
                 className="btn btn-secondary"
                 onClick={() => {
@@ -298,8 +310,12 @@ const Home = props => {
                 Number Owned <span></span>
               </p>
               <p>
-                Price <span>1</span>
+                Price <span>{Espresso.costOfASingle}</span>
               </p>
+              <i
+                class="fas fa-info-circle m-1"
+                title="Espresso Machines are the epitome of a classic coffee shop, congratulations on making it here. Buy whatever you want just make sure you have enough coffee!"
+              ></i>
               <button
                 className="btn btn-secondary"
                 onClick={() => {

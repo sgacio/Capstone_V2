@@ -43,11 +43,11 @@ export class MainNavBar extends Component {
             className="navbar-expand-sm ng-white border-bottom box-shadow mb-3 justify-content-center"
             light
           >
-            <i class="fas fa-mug-hot"></i>
+            <i class="fan fas fa-mug-hot"></i>
             <NavbarBrand className="coffee-clicker font-weight-bolder font-italic">
               Coffee Clicker
             </NavbarBrand>
-            <i class="fas fa-mug-hot"></i>
+            <i class="fan fas fa-mug-hot"></i>
           </Navbar>
         </header>
         <Router>
